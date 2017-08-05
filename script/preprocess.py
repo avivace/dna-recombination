@@ -14,7 +14,8 @@ def segment(lenght, parts, offset=0):
 		return [[[0+offset, lenght+offset]]]
 	if parts == 2:
 		for i in range(1, lenght):
-			segmentations.append([[0+offset, i+offset], [i+offset,lenght+offset]])
+			segmentations.append([[0+offset, i+offset], [i+offset,lenght+
+				offset]])
 		return segmentations
 	if parts == lenght:
 		segmentations.append([[0+offset,1+offset]])
@@ -37,17 +38,24 @@ def segmentString(string, segmentation, cut=" - "):
 	Given a string and a compatible segmentation, compute the segmented
 	string, using the specified character to represent the cuts.
 	"""
-	segmentedWord = ""
+	result = ""
 	for i in range(0, len(segmentation)):
 		result += string[segmentation[i][0]:segmentation[i][1]]
 		if i != len(segmentation)-1:
-			segmentedWord += cut
-	return segmentedWord
+			result += cut
+	return result
 
 
-s = segment(7, 2, 0)
 
 
-for i, element in enumerate(s):
-	print("SEGMENTATION "+str(i) +" :"+ str(s[i]))
-	print(segmentString("Antonio", s[i]))
+# Print every possibile segmentation of a string
+# (trying every number of parts)
+string = "ACCCCGGGAAGAGAGAGGATGAGT"
+c = 0
+for j in range(1, len(string)):
+	s = segment(len(string), j, 0)
+	for i, element in enumerate(s):
+		print("SEGMENTATION "+ str(c) + "( " + str(j) + " parts:" + str(i) +
+			") :"+ str(s[i]))
+		print(segmentString(string, s[i]))
+		c+=1
