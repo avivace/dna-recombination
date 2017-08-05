@@ -1,5 +1,13 @@
 def segment(lenght, parts, offset=0):
+	"""
+	Compute the list of all the possibile segmentations (using all the given
+	parts) of a string with the specified lenght
+	Every segmentation is a list of segments
+	Every segment is an array containing the start and end indexes
+	"""
 	segmentations = []
+	# Offset is used to keep the index values relative to the original string
+	# that caused the recursive call
 	if (parts > lenght):
 		raise ValueError("Can't divide in more parts than the total lenght")
 	if parts == 1:
@@ -24,19 +32,22 @@ def segment(lenght, parts, offset=0):
 					segmentations[n].append(seg)
 	return segmentations
 
-def stringSegments(string, segmentation):
+def segmentString(string, segmentation, cut=" - "):
+	"""
+	Given a string and a compatible segmentation, compute the segmented
+	string, using the specified character to represent the cuts.
+	"""
 	segmentedWord = ""
 	for i in range(0, len(segmentation)):
-		segmentedWord += string[segmentation[i][0]:segmentation[i][1]]
+		result += string[segmentation[i][0]:segmentation[i][1]]
 		if i != len(segmentation)-1:
-			segmentedWord += " "
+			segmentedWord += cut
 	return segmentedWord
 
 
 s = segment(7, 2, 0)
 
-print(stringSegments("Antonio", s[0]))
 
 for i, element in enumerate(s):
 	print("SEGMENTATION "+str(i) +" :"+ str(s[i]))
-	print(stringSegments("Antonio", s[i]))
+	print(segmentString("Antonio", s[i]))
