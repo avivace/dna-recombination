@@ -12,7 +12,7 @@ Formal stage start. Problem definition.
 ILP: first constraints and properties.
 
 #### July, 27
-Review of the ILP formulation: corrections, objective function (min MDSs quantity), functions definitions (equivalence, inverse, MIC/MAC substring notation). GUROBI software.
+Review of the ILP formulation: corrections, objective function (min MDSs quantity), functions definitions (equivalence, inverse, MIC/MAC substring notation). LP solver: GUROBI.
 
 Preprocessing script:
 
