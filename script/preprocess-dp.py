@@ -86,7 +86,9 @@ def segmentString(string, segmentation, cut=" - "):
 
 # Print every possibile segmentation of a string
 # (trying every number of parts)
+
 string = "HELLOWORLD"
+
 c = 0
 for j in range(1, len(string)+1):
 	s = segment(len(string), j, 0)
