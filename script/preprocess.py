@@ -50,12 +50,12 @@ def segmentString(string, segmentation, cut=" - "):
 
 # Print every possibile segmentation of a string
 # (trying every number of parts)
-string = "ACCCCGGGAAGAGAGAGGATGAGT"
+string = "HELLOWORLD!HELLOWORLD"
 c = 0
-for j in range(1, len(string)):
+for j in range(1, len(string)+1):
 	s = segment(len(string), j, 0)
 	for i, element in enumerate(s):
-		print("SEGMENTATION "+ str(c) + "( " + str(j) + " parts:" + str(i) +
-			") :"+ str(s[i]))
+		#print("SEGMENTATION "+ str(c) + "( " + str(j) + " parts:" + str(i) +
+		#	") :"+ str(s[i]))
 		print(segmentString(string, s[i]))
 		c+=1
