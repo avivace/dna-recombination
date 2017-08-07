@@ -1,4 +1,4 @@
-- *q* is the total quantity of MDS
+- *q* is an upper bound of the total quantity of MDS (*lenght/2*)
 - `=` is string equivalence
 - `MIC[i,j]` (`MAC[i,j]`) is the substring starting at `i` and finishing at `j` (`i`,`j` being positions) of the MIC(MAC). Can be trivially defined using string concatenation and *MIC(i,c)* (*MAC(i,c)*).
 - `Inverse(String)` is the Watson-Crick reverse complement of `String`
