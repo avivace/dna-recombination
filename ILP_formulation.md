@@ -1,3 +1,5 @@
+## DNA Recombination, ILP formulation
+
 - *q* is an upper bound of the total quantity of MDS (*lenght/2*)
 - `=` is string equivalence
 - `MIC[i,j]` (`MAC[i,j]`) is the substring starting at `i` and finishing at `j` (`i`,`j` being positions) of the MIC(MAC). Can be trivially defined using string concatenation and *MIC(i,c)* (*MAC(i,c)*).
@@ -13,6 +15,8 @@ $MDS_{MACend}(i,j) = \begin{cases} 0 \\ 1, & \mbox{if MDS } i\mbox{ ends at posi
 
 $Inv(i) = \begin{cases} 0 \\ 1, & \mbox{if MDS } i\mbox{ is inverted in the MAC } \end{cases}$
 
+$cwc(i,j,h,l) = \begin{cases} 0 \\ 1, & \mbox{if MIC[i:j] is the reverse complement of MAC[h:l]} \end{cases}$
+
 $MAC(i,c) = \begin{cases} 0 \\ 1, & \mbox{if } c\mbox{ is the character at position } i \mbox{ in the MAC} \end{cases}$
 
 $MIC(i,c) = \begin{cases} 0 \\ 1, & \mbox{if } c\mbox{ is the character at position } i \mbox{ in the MIC} \end{cases}$
@@ -22,6 +26,12 @@ $IES(i) = \begin{cases} 0 \\ 1, & \mbox{if } i \mbox{ is part of an IES:} \mathl
 $MDS_{MICstart}(i,a) + MDS_{MICend}(i,b) + MDS_{MACstart}(i,c) + MDS_{MACend}(i,d) + IES(i) = 5 \Rightarrow \mbox{\code{ MIC[a,b] = Inverse(MAC[c,d])}}$
 
 $MDS_{MICstart}(i,a) + MDS_{MICend}(i,b) + MDS_{MACstart}(i,c) + MDS_{MACend}(i,d) = 4, IES(i)=0 \Rightarrow \mbox{\code{ MIC[a,b] = MAC[c,d]}}$
+
+$\mathlarger{\sum_{j} MDS_{MICstart}(i,j)\leq 1}$
+
+$\mathlarger{\sum_{j} MDS_{MICend}(i,j) = \sum_{j} MDS_{MICstart}(i,j)}$
+
+$Eq(i,j,h,l) = \begin{cases} 0 \\ 1, & \mbox{if } MIC[i:j] = MAC[h:l] \end{cases}$
 
 $P_{start}(i,j) = \begin{cases} 0 \\ 1, & \mbox{if } MDS_{MACstart}(i,j) = 1 \mbox{, Pointer } i \mbox{ starts at position } j \mbox{ in the MAC} \end{cases}$
 
