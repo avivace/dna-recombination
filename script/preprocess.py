@@ -1,3 +1,5 @@
+# Usage: python3 preprocess.py
+
 def segment(lenght, parts, offset=0):
 	"""
 	Compute the list of all the possibile segmentations (using all the given

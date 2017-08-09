@@ -1,3 +1,5 @@
+# Usage: python3 preprocess-dp.py
+
 def lcs(a, b):
     lengths = [[0 for j in range(len(b)+1)] for i in range(len(a)+1)]
     for i, x in enumerate(a):
@@ -40,6 +42,7 @@ def segment(lenght, parts, offset=0):
 	# that caused the recursive call
 	if (segM[lenght][parts][offset] != 0):
 		return segM[lenght][parts][offset]
+	# TODO
 	#elif (segM[lenght][parts][0] != 0)
 		#offset, save and return it
 	else:
@@ -87,7 +90,7 @@ def segmentString(string, segmentation, cut=" - "):
 # Print every possibile segmentation of a string
 # (trying every number of parts)
 
-string = "HELLOWORLD"
+string = "HELLOWORLDFADFASDFASD"
 
 c = 0
 for j in range(1, len(string)+1):

@@ -1,9 +1,10 @@
-## DNA Recombination, ILP formulation
+## ILP formulation
 
 - *q* is an upper bound of the total quantity of MDS (*lenght/2*)
 - `=` is string equivalence
 - `MIC[i,j]` (`MAC[i,j]`) is the substring starting at `i` and finishing at `j` (`i`,`j` being positions) of the MIC(MAC). Can be trivially defined using string concatenation and *MIC(i,c)* (*MAC(i,c)*).
 - `Inverse(String)` is the Watson-Crick reverse complement of `String`
+- **Size** of the Input genome: MIC is fragmented into 225 000 MDSs. The process produces 16 000 MAC chromosomes, approximately 90% of these MAC chromosomes encode a single gene. The size of these molecules ranges from ≈0.31 to 66 kb.
 
 $MDS_{MICstart}(i,j) = \begin{cases} 0 \\ 1, & \mbox{if MDS } i\mbox{ starts at position } j \mbox{ in the MIC} \end{cases}$
 
