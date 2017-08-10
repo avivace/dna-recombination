@@ -4,7 +4,15 @@
 - `=` is string equivalence
 - `MIC[i,j]` (`MAC[i,j]`) is the substring starting at `i` and finishing at `j` (`i`,`j` being positions) of the MIC(MAC). Can be trivially defined using string concatenation and *MIC(i,c)* (*MAC(i,c)*).
 - `Inverse(String)` is the Watson-Crick reverse complement of `String`
-- **Size** of the Input genome: MIC is fragmented into 225 000 MDSs. The process produces 16 000 MAC chromosomes, approximately 90% of these MAC chromosomes encode a single gene. The size of these molecules ranges from ≈0.31 to 66 kb.
+- Size of the Oxytricha Input genome: MIC is fragmented into ~750 000 MDSs, MAC into 300 000.
+
+$objective function: \qquad min \mathlarger{\sum_{i,j} MDS_{MACstart}(i,j)}$
+
+$Possible_{MDSMAC}(i,a,b) = \begin{cases} 0 \\ 1, & \mbox{if MDS } i\mbox{ can start at } a \mbox{ and finish at } b \mbox{ in the MAC} \end{cases}$
+
+$Possible_{MDSMIC}(i,a,b) = \begin{cases} 0 \\ 1, & \mbox{if MDS } i\mbox{ can start at } a \mbox{ and finish at } b \mbox{ in the MIC} \end{cases}$
+
+$Possible_{assignment}(a,b,c,d) = \begin{cases} 0 \\ 1, & \mbox{if \code{MIC[a,b] = MAC[c,d]} } \end{cases}$
 
 $MDS_{MICstart}(i,j) = \begin{cases} 0 \\ 1, & \mbox{if MDS } i\mbox{ starts at position } j \mbox{ in the MIC} \end{cases}$
 
@@ -16,7 +24,7 @@ $MDS_{MACend}(i,j) = \begin{cases} 0 \\ 1, & \mbox{if MDS } i\mbox{ ends at posi
 
 $Inv(i) = \begin{cases} 0 \\ 1, & \mbox{if MDS } i\mbox{ is inverted in the MAC } \end{cases}$
 
-$cwc(i,j,h,l) = \begin{cases} 0 \\ 1, & \mbox{if MIC[i:j] is the reverse complement of MAC[h:l]} \end{cases}$
+$cwc(i,j,h,l) = \begin{cases} 0 \\ 1, & \mbox{if \code{MIC[i:j]} is the reverse complement of \code{MAC[h:l]}} \end{cases}$
 
 $MAC(i,c) = \begin{cases} 0 \\ 1, & \mbox{if } c\mbox{ is the character at position } i \mbox{ in the MAC} \end{cases}$
 
