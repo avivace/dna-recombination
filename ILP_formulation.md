@@ -5,12 +5,13 @@
 - `MIC[i,j]` (`MAC[i,j]`) is the substring starting at `i` and finishing at `j` (`i`,`j` being positions) of the MIC(MAC). Can be trivially defined using string concatenation and *MIC(i,c)* (*MAC(i,c)*).
 - `Inverse(String)` is the Watson-Crick reverse complement of `String`
 - Size of the Oxytricha Input genome: MIC is fragmented into ~750 000 MDSs, MAC into 300 000.
+- Variables marked with $*$ are populated during the preprocessing phase.
 
 $objective function: \qquad min \mathlarger{\sum_{i,j} MDS_{MACstart}(i,j)}$
 
-$Possible_{MDSMAC}(i,a,b) = \begin{cases} 0 \\ 1, & \mbox{if MDS } i\mbox{ can start at } a \mbox{ and finish at } b \mbox{ in the MAC} \end{cases}$
+$*Possible_{MDSMAC}(i,a,b) = \begin{cases} 0 \\ 1, & \mbox{if MDS } i\mbox{ can start at } a \mbox{ and finish at } b \mbox{ in the MAC} \end{cases}$
 
-$Possible_{MDSMIC}(i,a,b) = \begin{cases} 0 \\ 1, & \mbox{if MDS } i\mbox{ can start at } a \mbox{ and finish at } b \mbox{ in the MIC} \end{cases}$
+$*Possible_{MDSMIC}(i,a,b) = \begin{cases} 0 \\ 1, & \mbox{if MDS } i\mbox{ can start at } a \mbox{ and finish at } b \mbox{ in the MIC} \end{cases}$
 
 $Possible_{assignment}(a,b,c,d) = \begin{cases} 0 \\ 1, & \mbox{if \code{MIC[a,b] = MAC[c,d]} } \end{cases}$
 
