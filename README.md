@@ -30,3 +30,10 @@ Preprocessing script:
 - *Programmed genome rearrangements in the ciliate Oxytricha* - V.Talya Yerlici, Laura F. Landweber
 - *RNA-guided DNA assembly* - Angela Angeleska, Natasa Jonoska
 - [Gusfield ILP tutorial](http://csiflabs.cs.ucdavis.edu/~gusfield/tutorial.pdf)
+
+### Build
+Markdown/LaTeX files are built into PDF using pandoc and texlive:
+
+```
+pandoc file.md  --template='template.tex' --highlight-style tango -o file.pdf
+```

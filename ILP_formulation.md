@@ -7,7 +7,7 @@
 - Size of the Oxytricha Input genome: MIC is fragmented into ~750 000 MDSs, MAC into 300 000.
 - Variables marked with $*$ are populated during the preprocessing phase.
 
-$objective function: \qquad min \mathlarger{\sum_{i,j} MDS_{MACstart}(i,j)}$
+$\linebreak objective function: \qquad min \mathlarger{\sum_{i,j} MDS_{MACstart}(i,j)}$
 
 $*Possible_{MDSMAC}(i,a,b) = \begin{cases} 0 \\ 1, & \mbox{if MDS } i\mbox{ can start at } a \mbox{ and finish at } b \mbox{ in the MAC} \end{cases}$
 
@@ -54,3 +54,15 @@ $Cov_{MIC}(i,j) = \begin{cases} 0 \\ 1, & \mbox{if } \mathlarger{\sum_{l\leq i} 
 $Cov_{MAC}(i,j) = \begin{cases} 0 \\ 1, & \mbox{if MDS } i\mbox{ covers the position } j \mbox{ in the MAC} \end{cases}$
 
 $Cov_{MAC}(i,j) = \begin{cases} 0 \\ 1, & \mbox{if } \mathlarger{\sum_{l\leq i} MDS_{MACstart}(i,l) + \sum_{l\textless i}MDS_{MACend}(i,l) = 1} \end{cases}$
+
+$Cov_{MIC}(i,j) \geq MDS_{MICstart}(i,j)$
+
+$Cov_{MAC}(i,j) \geq MDS_{MACstart}(i,j)$
+
+$Cov_{MIC}(i,j) = 3 - (cov_{MIC}(i,j-1) + cov_{MAC}(i,j+1) + MDS_{MICstart}(i,j) + MDS_{MICend}(i,j))$
+
+$Cov_{MAC}(i,j) = 3 - (cov_{MAC}(i,j-1) + cov_{MAC}(i,j+1) + MDS_{MACstart}(i,j) + MDS_{MACend}(i,j))$
+
+$Cov_{MIC}(i,j) = \mathlarger{\sum_{l\leq i} MDS_{MICstart}(i,l) + \sum_{l\textless i}MDS_{MICend}(i,l) }$
+
+$Cov_{MAC}(i,j) = \mathlarger{\sum_{l\leq i} MDS_{MACstart}(i,l) + \sum_{l\textless i}MDS_{MACend}(i,l) }$
