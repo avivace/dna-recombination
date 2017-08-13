@@ -66,3 +66,11 @@ $Cov_{MAC}(i,j) = 3 - (cov_{MAC}(i,j-1) + cov_{MAC}(i,j+1) + MDS_{MACstart}(i,j)
 $Cov_{MIC}(i,j) = \mathlarger{\sum_{l\leq i} MDS_{MICstart}(i,l) + \sum_{l\textless i}MDS_{MICend}(i,l) }$
 
 $Cov_{MAC}(i,j) = \mathlarger{\sum_{l\leq i} MDS_{MACstart}(i,l) + \sum_{l\textless i}MDS_{MACend}(i,l) }$
+
+$Cov_{MIC}(i,-1) = 0$
+
+$Cov_{MAC}(i,-1) = 0$
+
+$Cov_{MIC}(i,j) = Cov_{MIC}(i,j-1) - MDS_{MICend}(i,j-1) + MDS_{MICstart}(i,j)$
+
+$Cov_{MAC}(i,j) = Cov_{MAC}(i,j-1) - MDS_{MACend}(i,j-1) + MDS_{MACstart}(i,j)$
