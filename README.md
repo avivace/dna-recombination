@@ -24,7 +24,7 @@ Preprocessing phase (properties directly verifiable on the instance):
 
 - Constraints description or brief explanation;
 - Group similar constraints;
-- Correct every non-compliant constraint (e.g. if cannot be used, if not in the preprocessing phase);
+- Correct every non-compliant constraint (e.g. `if` cannot be used, if not in the preprocessing phase);
 - Correct `Cov_{MIC}(i,j)`;
 - Remove useless and redunant constraints;
 - Necessary variable and constraints: proof of correctness;
@@ -50,6 +50,6 @@ Being *I* an instance of the problem, *P* the correspondent ILP formulation, *A*
 - [MDS and IES annotation algorithm (Python) used in `mds ies db`](http://knot.math.usf.edu/midas/algorithm.html)
     - [BLAST](https://blast.ncbi.nlm.nih.gov/Blast.cgi) - *Basic Local Alignment Search Tool*
 
-- *Programmed genome rearrangements in the ciliate Oxytricha* - V.Talya Yerlici, Laura F. Landweber
+- *Programmed genome rearrangements in the ciliate Oxytricha* - V. Talya Yerlici, Laura F. Landweber
 - *RNA-guided DNA assembly* - Angela Angeleska, Natasa Jonoska
 - [Gusfield ILP tutorial](http://csiflabs.cs.ucdavis.edu/~gusfield/tutorial.pdf)

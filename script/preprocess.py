@@ -1,63 +1,19 @@
-# Usage: python3 preprocess.py
+#!/usr/bin/python3
+import numpy
 
-def segment(lenght, parts, offset=0):
-	"""
-	Compute the list of all the possibile segmentations (using all the given
-	parts) of a string with the specified lenght
-	Every segmentation is a list of segments
-	Every segment is an array containing the start and end indexes
-	"""
-	segmentations = []
-	# Offset is used to keep the index values relative to the original string
-	# that caused the recursive call
-	if (parts > lenght):
-		raise ValueError("Can't divide in more parts than the total lenght")
-	if parts == 1:
-		return [[[0+offset, lenght+offset]]]
-	if parts == 2:
-		for i in range(1, lenght):
-			segmentations.append([[0+offset, i+offset], [i+offset,lenght+
-				offset]])
-		return segmentations
-	if parts == lenght:
-		segmentations.append([[0+offset,1+offset]])
-		for i in range(1, lenght):
-			segmentations[0].append([i+offset,i+1+offset])
-		return segmentations
-	else:
-		n = -1
-		for i in range(1, lenght-parts+2):
-			rest = segment(lenght-i, parts-1, offset+i)
-			for j, element in enumerate(rest):
-				segmentations.append([[0+offset, i+offset]])
-				n+=1
-				for k, seg in enumerate(element):
-					segmentations[n].append(seg)
-	return segmentations
+# Dummy Input (no overlapped sections/pointers)
+#      I1 M1    I2  M2    I2
+MIC = "ACCCCAAAAACTGCCCGTATAG"
+MAC = "CCAAAACCCGTA"
 
-def segmentString(string, segmentation, cut=" - "):
-	"""
-	Given a string and a compatible segmentation, compute the segmented
-	string, using the specified character to represent the cuts.
-	"""
-	result = ""
-	for i in range(0, len(segmentation)):
-		result += string[segmentation[i][0]:segmentation[i][1]]
-		if i != len(segmentation)-1:
-			result += cut
-	return result
+print("Init")
+Eq = numpy.zeros((len(MIC),len(MIC),len(MAC),len(MAC)))
 
-
-
-
-# Print every possibile segmentation of a string
-# (trying every number of parts)
-string = "HELLOWORLD!HELLOWORLD"
-c = 0
-for j in range(1, len(string)+1):
-	s = segment(len(string), j, 0)
-	for i, element in enumerate(s):
-		#print("SEGMENTATION "+ str(c) + "( " + str(j) + " parts:" + str(i) +
-		#	") :"+ str(s[i]))
-		print(segmentString(string, s[i]))
-		c+=1
+print("Populating Eq")
+for i in range(0, len(MIC)):
+	for j in range(i, len(MIC)):
+		for h in range(0, len(MAC)):
+			for l in range(h, len(MAC)):
+				if (MIC[i:j] and MAC[h:l] and (MIC[i:j] == MAC[h:l])):
+					Eq[i][j][h][l] = 1
+					print("matched",i,j,h,l)

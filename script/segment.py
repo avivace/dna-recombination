@@ -1,4 +1,4 @@
-# Usage: python3 preprocess-dp.py
+# Usage: python3 preprocess.py
 
 def lcs(a, b):
     lengths = [[0 for j in range(len(b)+1)] for i in range(len(a)+1)]
