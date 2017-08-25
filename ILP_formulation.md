@@ -3,7 +3,7 @@
 - *q* is an upper bound of the total quantity of MDS (*lenght/2*)
 - `=` is string equivalence
 - `MIC[i,j]` (`MAC[i,j]`) is the substring starting at `i` and finishing at `j` (`i`,`j` being positions) of the MIC(MAC). Can be trivially defined using string concatenation and *MIC(i,c)* (*MAC(i,c)*).
-- `Inverse(String)` is the Watson-Crick reverse complement of `String`
+- `reverse_complement(String)` is the Watson-Crick reverse complement of `String`
 - Size of the Oxytricha Input genome: MIC is fragmented into ~750 000 MDSs, MAC into 300 000.
 - Variables marked with $*$ are populated during the preprocessing phase.
 
@@ -37,9 +37,9 @@ $*MIC(i,c) = \begin{cases} 0 \\ 1, & \mbox{if } c\mbox{ is the character at posi
 
 $IES(i) = \begin{cases} 0 \\ 1, & \mbox{if } i \mbox{ is part of an IES:} \mathlarger{\sum_{j\leq i \leq k ; 1 \leq a \leq q} MDS_{MICstart}(a,j) + MDS_{MICend}(a,k) = 0} \end{cases}$
 
-$MDS_{MICstart}(i,a) + MDS_{MICend}(i,b) + MDS_{MACstart}(i,c) + MDS_{MACend}(i,d) + Inv(i) = 5 \Rightarrow \mbox{\code{ MIC[a,b] = Inverse(MAC[c,d])}}$
+$MDS_{MICstart}(i,a) + MDS_{MICend}(i,b) + MDS_{MACstart}(i,c) + MDS_{MACend}(i,d) + Inv(i) - 5 cwc(a,b,c,d) = 0$
 
-$MDS_{MICstart}(i,a) + MDS_{MICend}(i,b) + MDS_{MACstart}(i,c) + MDS_{MACend}(i,d) = 4, Inv(i)=0 \Rightarrow \mbox{\code{ MIC[a,b] = MAC[c,d]}}$
+$MDS_{MICstart}(i,a) + MDS_{MICend}(i,b) + MDS_{MACstart}(i,c) + MDS_{MACend}(i,d) - 4 Eq(a,b,c,d) = Inv(i)$
 
 $\mathlarger{\sum_{j} MDS_{MICstart}(i,j)\leq 1}$
 
