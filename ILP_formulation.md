@@ -48,11 +48,11 @@ $Cov_{MAC}(i,j) = \begin{cases} 0 \\ 1, & \mbox{if MDS } i\mbox{ covers the posi
 
 ### Constraints
 
->Internally Eliminated Sequences
+> Internally Eliminated Sequences
 
 $IES(j) = \begin{cases} 0 \\ 1, & \mbox{if } i \mbox{ is part of an IES:} \mathlarger{\sum_{0 \leq i \leq q} Cov_{MIC}(i,j) = 0} \end{cases}$
 
->MDSs must correspond to identical or reverse and complemented substrings of MIC and MAC. The following constraints enforce this fact:
+> MDSs must correspond to identical or reverse and complemented substrings of MIC and MAC. The following constraints enforce this fact:
 
 $MDS_{MICstart}(i,a) + MDS_{MICend}(i,b) + MDS_{MACstart}(i,c) + MDS_{MACend}(i,d) + Inv(i) - 5 cwc(a,b,c,d) = 0$
 
@@ -62,22 +62,8 @@ $\mathlarger{\sum_{j} MDS_{MICstart}(i,j)\leq 1}$
 
 $\mathlarger{\sum_{j} MDS_{MICend}(i,j) = \sum_{j} MDS_{MICstart}(i,j)}$
 
-$Cov_{MIC}(i,j) \geq MDS_{MICstart}(i,j)$
+> Coverage
 
-$Cov_{MAC}(i,j) \geq MDS_{MACstart}(i,j)$
+$\mathlarger{\sum_{l\leq j} MDS_{MICstart}(i,l) + \sum_{l\geq j}MDS_{MICend}(i,l) - 2Cov_{MIC}(i,j) = 0}$
 
-$Cov_{MIC}(i,j) = 3 - (cov_{MIC}(i,j-1) + cov_{MAC}(i,j+1) + MDS_{MICstart}(i,j) + MDS_{MICend}(i,j))$
-
-$Cov_{MAC}(i,j) = 3 - (cov_{MAC}(i,j-1) + cov_{MAC}(i,j+1) + MDS_{MACstart}(i,j) + MDS_{MACend}(i,j))$
-
-$\mathlarger{\sum_{l\leq j} MDS_{MICstart}(i,l) + \sum_{l\geq j}MDS_{MICend}(i,l) - Cov_{MIC}(i,j) = 2}$
-
-$\mathlarger{\sum_{l\leq j} MDS_{MACstart}(i,l) + \sum_{l\geq j}MDS_{MACend}(i,l) - Cov_{MAC}(i,j) = 2}$
-
-$Cov_{MIC}(i,-1) = 0$
-
-$Cov_{MAC}(i,-1) = 0$
-
-$Cov_{MIC}(i,j) = Cov_{MIC}(i,j-1) - MDS_{MICend}(i,j-1) + MDS_{MICstart}(i,j)$
-
-$Cov_{MAC}(i,j) = Cov_{MAC}(i,j-1) - MDS_{MACend}(i,j-1) + MDS_{MACstart}(i,j)$
+$\mathlarger{\sum_{l\leq j} MDS_{MACstart}(i,l) + \sum_{l\geq j}MDS_{MACend}(i,l) - 2Cov_{MAC}(i,j) = 0}$
