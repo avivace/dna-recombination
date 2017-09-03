@@ -1,6 +1,7 @@
-#!/usr/bin/python3
+#!/usr/bin/python
 import numpy
 import random
+import __future__
 
 def reverse_complement(dna):
     complement = {'A': 'T', 'C': 'G', 'G': 'C', 'T': 'A'}
@@ -48,7 +49,6 @@ for i in range(0, len(MIC)):
 	for j in range(i+1, len(MIC)):
 		for h in range(0, len(MAC)):
 			for l in range(h+1, len(MAC)):
-				print(MIC[i:j],MAC[h:l])
 				if (MIC[i:j] and MAC[h:l] and (MIC[i:j] == MAC[h:l])):
 					Eq[i,j,h,l] = 1
 					#if (j-i > 3):
