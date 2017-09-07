@@ -3,12 +3,15 @@
 ## Timeline
 
 #### May, 22
+
 Preliminary explanations.
 
 #### July, 3
+
 Formal stage start. Problem definition.
 
 #### July, 6
+
 ILP: first constraints and properties.
 
 #### July, 27
@@ -42,6 +45,10 @@ Being *I* an instance of the problem, *P* the correspondent ILP formulation, *A*
 
 1. Show how to use a solution of *P* (computed by Gurobi) to build a solution of the starting problem;
 2. Show that (1) is always possible.
+
+### September, 15
+
+- TODO
 
 ## Resources
 

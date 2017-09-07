@@ -31,7 +31,7 @@ print("MAC length:",len(MAC))
 
 print("Reading MIC")
 MIC = ''
-with open('oxytri_mac.fna') as f:
+with open('oxytri_mic_cut.fna') as f:
     for line in f:
         if line[0] != '>':
             MIC = MIC + line.rstrip()
@@ -44,26 +44,24 @@ cwc = sparray((len(MIC),len(MIC),len(MAC),len(MAC)))
 MACmap = numpy.zeros((len(MAC), 5))
 MICmap = numpy.zeros((len(MIC), 5))
 
+MAC = MAC[0:1000]
+MIC = MIC[0:1000]
+matches = 0
+
+# Naive Method
 print("Populating Eq")
-for i in range(0, len(MIC)):
-	for j in range(i+1, len(MIC)):
-		for h in range(0, len(MAC)):
-			for l in range(h+1, len(MAC)):
-				if (MIC[i:j] and MAC[h:l] and (MIC[i:j] == MAC[h:l])):
-					Eq[i,j,h,l] = 1
-					#if (j-i > 3):
-					print("matched MIC",i,j,"to MAC", h, l, " - length:",j-i)
+for i in range(4, len(MIC)):
+    print(i)
+    for a in range (0, len(MIC)-i):
+        for b in range(0, len(MAC)-i):
+            if (MIC[a:a+i] == MAC[b:b+i]):
+                matches = matches+1
+                print("matched ",a,a+i,b, b+i,"len",i,MIC[a:a+i],MAC[b:b+i])
+
+print(matches, "matches")
 
 
 print("Populating cwc")
-for i in range(0, len(MIC)):
-	for j in range(i, len(MIC)):
-		for h in range(0, len(MAC)):
-			for l in range(h, len(MAC)):
-				if (MIC[i:j] and MAC[h:l] and (MIC[i:j] == reverse_complement(MAC[h:l]))):
-					cwc[i,j,h,l] = 1
-					if (j-i > 1):
-						print("matched MIC",i,j,"to Reverse MAC", h, l, " - length:",j-i)
 
 numNotation = {'A': 1, 'C': 2, 'G': 3, 'T': 4}
 
