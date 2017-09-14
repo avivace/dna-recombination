@@ -2,7 +2,8 @@
 import numpy
 import random
 import __future__
-from Bio import pairwise2
+import sys, string
+import alignment
 
 def reverse_complement(dna):
     complement = {'A': 'T', 'C': 'G', 'G': 'C', 'T': 'A'}
@@ -45,8 +46,8 @@ cwc = sparray((len(MIC),len(MIC),len(MAC),len(MAC)))
 MACmap = numpy.zeros((len(MAC), 5))
 MICmap = numpy.zeros((len(MIC), 5))
 
-MAC = MAC[0:100000]
-MIC = MIC[0:100000]
+MAC = MAC[0:1000]
+MIC = MIC[0:1000]
 matches = 0
 
 # Naive Method
@@ -61,8 +62,8 @@ for i in range(11, 11):
 
 print(matches, "matches")
 
+alignment.needle(MIC, MAC)
 
-pairwise2.align.make_score_matrix_generic(MIC,MAC)
 
 print("Populating cwc")
 
