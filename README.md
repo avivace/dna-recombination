@@ -48,7 +48,7 @@ Being *I* an instance of the problem, *P* the correspondent ILP formulation, *A*
 
 ### September, 15
 
-- TODO
+- Produce a basic (solvable) version of the problem
 
 ## Resources
 
