@@ -31,7 +31,8 @@ numNotation = {1: 'A', 2: 'C', 3: 'G', 4: 'T'}
 
 # Generate MIC
 i = 0
-while (i<500):
+micl = 500
+while (i<micl):
 	c = random.randint(1,4)
 	mic = mic + numNotation[c]
 	i+=1
@@ -43,10 +44,15 @@ print(MDSn, "MDS")
 
 m = 0
 while (m < MDSn):
-	startOffset = random.randint(0, int(500/MDSn))
+	startOffset = random.randint(0, int(micl/MDSn))
 	length = random.randint(10,50)
-	print("MDS",m,"starts at",int(startOffset+(500/MDSn)*m), "and ends at", int(startOffset+(500/MDSn)*m)+length)
-	mac = mac + mic[int(startOffset+(500/MDSn)*m):int(startOffset+(500/MDSn)*m)+length]
+	print("MDS",m,"starts at",int(startOffset+(micl/MDSn)*m), "and ends at", int(startOffset+(micl/MDSn)*m)+length)
+	inverse = random.randint(0,4)
+	if (inverse == 4):
+		print("inversing MDS",m)
+		mac = mac + reverse_complement(mic[int(startOffset+(micl/MDSn)*m):int(startOffset+(micl/MDSn)*m)+length])
+	else:
+		mac = mac + mic[int(startOffset+(micl/MDSn)*m):int(startOffset+(micl/MDSn)*m)+length]
 	m+=1
 
 print("MIC  ", mic)
@@ -61,7 +67,7 @@ Eq = sparray((len(mic),len(mic),len(mac),len(mac)))
 
 matches = 0
 
-print("Populating Eq")
+print("Populating Eq and cwc")
 for i in range(0, len(mic)-1):
 	for j in range (i, len(mic)-1):
 		for a in range(0, len(mac)-(j-i)):
@@ -70,13 +76,6 @@ for i in range(0, len(mic)-1):
 				matches = matches+1
 				if (j-i) > 20:
 					print("Match with length ",j-i)
-
-print("Populating cwc")
-for i in range(0, len(mic)-1):
-	for j in range (i, len(mic)-1):
-		for a in range(0, len(mac)-(j-i)):
-			#print(i,j,a,a+(j-i))
-			if (mic[i:j] == reverse_complement(mac[a:a+(j-i)])):
-				matches = matches+1
-				if (j-i) > 0:
-					print("Match with length ",j-i)
+			elif (mic[i:j] == reverse_complement(mac[a:a+(j-i)])):
+				if (j-i) > 20:
+					print("Inverse match with length ",j-i)
