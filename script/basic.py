@@ -109,6 +109,7 @@ try:
 
 	## Constraints		
 	
+	# MDS substring equivalences
 	m.addConstrs((MDS_Mic_Start[i,a] +
 				  MDS_Mic_End[i,b] +
 				  MDS_Mac_Start[i,c] +
@@ -117,7 +118,7 @@ try:
 												  for b in range(micl)
 												  for c in range(macl)
 												  for d in range(macl)) , name="c0")
-	
+	# Reverse complement
 	m.addConstrs((MDS_Mic_Start[i,a] +
 				  MDS_Mic_End[i,b] +
 				  MDS_Mac_Start[i,c] +
@@ -128,16 +129,21 @@ try:
 												  for c in range(macl)
 												  for d in range(macl)), name="c1")
 	
-	
+	# Each MDS must start at least one time
 	m.addConstrs((sum(MDS_Mic_Start[i,a] for a in range(micl)) <= 1
 										 for i in range(11)), name="c2")
 
+	m.addConstrs((sum(MDS_Mac_Start[i,a] for a in range(macl)) <= 1
+										 for i in range(11)), name="c2b")
+
+	# MDSs with a start must have an end too.
 	m.addConstrs((sum(MDS_Mac_End[i,a] for a in range(macl)) == sum(MDS_Mac_Start[i,b] for b in range(macl)) 
 									   for i in range(11)), name="c3")
 
 	m.addConstrs((sum(MDS_Mic_End[i,a] for a in range(micl)) == sum(MDS_Mic_Start[i,b] for b in range(micl)) 
 									   for i in range(11)), name="c4")
-
+	
+	# end > start FIXME
 	for i in range(11):
 		end = -1
 		start = -1
@@ -149,6 +155,18 @@ try:
 		if (end != -1 & start != -1):
 			m.addConstr(end > start, name="c5")
 
+	# MIC Coverage
+	m.addConstrs(((sum(MDS_Mic_Start[i,l]) + 
+				  sum(MDS_Mic_End[i,k]) for l in range(0,j+1)
+				  						for k in range(l, micl)) - 
+				  2 * Cov_Mic[i,j] == 0 for i in range(11)
+				  					    for j in range(micl)),name="c6")
+	
+	# MAC Coverage
+	#m.addConstrs((sum(MDS_Mac_Start[i,l] for l in range(0,j+1)) + 
+	#			  sum(MDS_Mac_End[i,k] for k in range(l, macl)) - 
+	#			  2 * Cov_Mac[i,j] == 0 for i in range(11)
+	#			  					   for j in range(macl)),name="c7")
 
 	m.setObjective((sum(MDS_Mic_Start[i,a] for a in range(0,micl) for i in range(0,11))), GRB.MINIMIZE)
 
