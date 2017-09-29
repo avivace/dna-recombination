@@ -143,24 +143,38 @@ try:
 	m.addConstrs((sum(MDS_Mic_End[i,a] for a in range(micl)) == sum(MDS_Mic_Start[i,b] for b in range(micl)) 
 									   for i in range(11)), name="c4")
 	
+	# (MIC) Coverage definition
+	m.addConstrs(((Cov_Mic[i,j] == sum(MDS_Mic_Start[i,b] for b in range(0,j)) - 
+								  sum(MDS_Mic_End[i,e] for e in range(0,j)))
+								  for j in range(micl)
+								  for i in range(11)), name="c8")
+
+	# Each MDS must end exactly before the following one starts
+	m.addConstrs((MDS_Mac_End[i,j] == MDS_Mac_Start[i+1,j] for i in range(10)
+														   for j in range(macl)), name="c9")
+
+	# 100% MAC coverage
+	m.addConstrs((sum(Cov_Mac[i,j] for i in range(11)
+								   for j in range(macl)) == macl), name="c11")
+
 	# end > start FIXME
-	for i in range(11):
-		end = -1
-		start = -1
-		for a in range(macl):
-			if MDS_Mac_Start[i,a] == 1:
-				start = a
-			if MDS_Mac_End[i,a] == 1:
-				end = a
-		if (end != -1 & start != -1):
-			m.addConstr(end > start, name="c5")
+	#for i in range(11):
+	#	end = -1
+	#	start = -1
+	#	for a in range(macl):
+	#		if MDS_Mac_Start[i,a] == 1:
+	#			start = a
+	#		if MDS_Mac_End[i,a] == 1:
+	#			end = a
+	#	if (end != -1 & start != -1):
+	#		m.addConstr(end > start, name="c5")
 
 	# MIC Coverage
-	m.addConstrs(((sum(MDS_Mic_Start[i,l]) + 
-				  sum(MDS_Mic_End[i,k]) for l in range(0,j+1)
-				  						for k in range(l, micl)) - 
-				  2 * Cov_Mic[i,j] == 0 for i in range(11)
-				  					    for j in range(micl)),name="c6")
+	#m.addConstrs(((sum(MDS_Mic_Start[i,l]) + 
+	#			  sum(MDS_Mic_End[i,k]) for l in range(0,j+1)
+	#			  						for k in range(l, micl)) - 
+	#			  2 * Cov_Mic[i,j] == 0 for i in range(11)
+	#			  					    for j in range(micl)),name="c6")
 	
 	# MAC Coverage
 	#m.addConstrs((sum(MDS_Mac_Start[i,l] for l in range(0,j+1)) + 

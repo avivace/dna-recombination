@@ -1,3 +1,8 @@
 *.fna
 *.faa
 *.gff
+*.log
+*.aux
+*.toc
+*.synctex.gz
+
