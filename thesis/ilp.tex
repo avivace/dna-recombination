@@ -1,4 +1,23 @@
 \section{Definition} 
+\textit{Linear programming} is a technique for the mathematical optimization of a linear objective function, subject to linear equality and linear inequality constraints.
+
+Linear programs are problems that can be expressed in canonical form as:
+\paragraph{}
+
+${\displaystyle {\begin{aligned}
+	&{\text{maximize}}&&\mathbf {c} ^{\mathrm {T} }\mathbf {x}
+	\\&{\text{subject to}}&&A\mathbf {x} \leq \mathbf {b}
+	\\&{\text{and}}&&\mathbf {x} \geq \mathbf {0}
+	\\&&&{\text{(}}\mathbf {x} \in \mathbb {Z} ^{n}\text{)}
+	\\&
+	\end{aligned}}} $
+
+
+If the variables are forcibly constrained to be integers, we call the program \textit{Integer} or \textit{Integer Linear}.
+
+0-1 integer programming or binary integer programming (\textit{BIP}) is the special case of integer programming where variables are required to be 0 or 1 ($\mathbf {x} \in \mathbb \{0,1\} $).
+
+In contrast to linear programming, which can be solved efficiently in the worst case, integer programming problems are in many practical situations (bounded variables) NP-hard. BIP are classified as NP-hard too ("0–1 integer programming" is one of the \textit{Karp's 21 NP-complete problems}).
 
 \section{In Computational Biology}
 
