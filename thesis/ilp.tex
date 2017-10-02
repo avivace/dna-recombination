@@ -1,5 +1,5 @@
 \section{Definition} 
-\textit{Linear programming} is a technique for the mathematical optimization of a linear objective function, subject to linear equality and linear inequality constraints.
+\textit{Linear programming} (ILP) is a technique for the mathematical optimization of a linear objective function, subject to linear equality and linear inequality constraints.
 
 Linear programs are problems that can be expressed in canonical form as:
 \paragraph{}
@@ -13,17 +13,63 @@ ${\displaystyle {\begin{aligned}
 	\end{aligned}}} $
 
 
-If the variables are forcibly constrained to be integers, we call the program \textit{Integer} or \textit{Integer Linear}.
+If the variables are forcibly constrained to be integers, we call the program \textit{Integer} or \textit{Integer Linear} (ILP).
 
-0-1 integer programming or binary integer programming (\textit{BIP}) is the special case of integer programming where variables are required to be 0 or 1 ($\mathbf {x} \in \mathbb \{0,1\} $).
+0-1 integer programming or binary integer programming (BIP) is the special case of integer programming where variables are required to be 0 or 1 ($\mathbf {x} \in \mathbb \{0,1\} $).
 
 In contrast to linear programming, which can be solved efficiently in the worst case, integer programming problems are in many practical situations (bounded variables) NP-hard. BIP are classified as NP-hard too ("0–1 integer programming" is one of the \textit{Karp's 21 NP-complete problems}).
 
 \section{In Computational Biology}
-At its inception, the focus of Computational Biology was on the development of efficient algorithms and data structures that were able to deal with the data being introduced in life science applications. In the last decade (?), the introduction of high throughput methods for biomedical data analysis and the rise of systems biology (?) made Statistical Learning approaches as a standard. This element and the fact that biological processes are usually reduced and studied as simulations (because the actual nature of them is still being investigated, as in the case of our problem) lead to the introduction of a lot new Optimization problems in the field.
+
+At its inception, the focus of Computational Biology was on the development of efficient algorithms and data structures that were able to deal with the data being introduced in life science applications. Lately, the introduction of high throughput methods for biomedical data analysis and the rise of Systems Biology (the study of systems of biological components) made Statistical Learning approaches a standard.
+
+Furthermore, new and accessible sequencing methods caused the quantity of the data produced to grew exponentially.
+
+This element and the fact that biological processes are usually reduced and studied as simulations (because the actual nature of them is still being investigated, as in the case of our problem) lead to the introduction of a lot new optimization problems in the field.
+
+In most cases, these optimisazion problems are discrete ones: hence the success of ILP-based approaches.
+
+\subsection{Advantages}
+
+There are a number of additional reasons why ILP should be taken into consideration, even when the problems seems to not require it or the advantage of introducing an ILP formulation isn't initally clear:
+
+\begin{itemize}
+	\item Commercial ILP \textit{solvers} are available;
+	\item The progress of those solvers has been spectacular: benchmark ILP problems can be solved \textit{200-bilion} times faster than twenty-years ago;
+	\item Even for a problem where a worst-case efficient general algorithm might be possible, the time and effort needed to find it, implement it as a computer program, is typically much greater than the time and effort needed to formulate and implement an ILP solution to the problem.
+	\item Some problems can be modeled in a much more efficient with ILP.
+\end{itemize}
+
+\section{An real-world case: Multiple Sequence Alignment}
+
+This is a classical situation where dynamic programming can be exploited: the problem was initially treated exposing the similarities and differences of the given set of sequences by calculating a two-dimensional matrix where each row represents a sequence and the columns exhibit their common patterns and their differences.
+
+To evaluate the quality of alignments, a large number of scoring functions has been suggested, leading to this definition:
+
+\textbf{Problem (MSA):} \, Given a set of sequences and a scoring function, calculate an alignment of the sequences that is optimal with respect to the scoring function.
+
+The runtime and storage requirements of such approach are very limiting and exponentially growing when raising the number of the sequences: an instance of the problem with 10 of them was, and still is, a real challenge, while in many realistic applications users would like to compare dozens of sequences[citation].
+
+A variant of this problem is the Maximum Weight Trace problem (MWT), introduced by John Kececioglu [quotation needed].
+
+\textbf{Problem (MWT):} \, [MWT brief description]
 
 
+Every Multiple Sequence Alignment problem can be cast using this formulation.
 
+In 1997, Reinert et al. [quotation needed] proposed an ILP formulation for MWT
 
-\section{Examples}
-\subsection{Problem 1}
+\section{Design of an ILP formulation}
+
+\subsection{Idioms}
+
+Here's how many logic expressions can be expressed as linear disequalities without side effects or uncovered cases:
+
+\paragraph{If Then}
+todo
+
+\paragraph{Only If} (binary variables)
+$$z \leftrightarrow (L \geq b) \qquad \text{($z = 1$ only if $L \geq b$)}$$
+Let \textit{s} be the smallest value that L can achieve and set $m = s - b$
+$$ L + m \times z \geq m + b$$
+
