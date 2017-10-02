@@ -63,13 +63,44 @@ In 1997, Reinert et al. [quotation needed] proposed an ILP formulation for MWT
 
 \subsection{Idioms}
 
-Here's how many logic expressions can be expressed as linear disequalities without side effects or uncovered cases:
+Here's how many logic expressions can be expressed as linear disequalities without side effects or uncovered cases.
 
-\paragraph{If Then}
-todo
+Suppose \textit{L} is an integer linear function of binary variables with \textit{M} being its upper limit and \textit{b} a positive integer. Many of these idioms can be reduced if some or all variables are binary, strictly positive, or bounded.
 
-\paragraph{Only If} (binary variables)
+\paragraph{If-Then}
+
+$$ L \geq b \rightarrow z \qquad \text{(If $L \geq  b $ then $z = 1$)}$$
+Linearly:
+$$ L - (M \times z) \leq  b - 1$$
+
+
+\paragraph{Only-If}
+
 $$z \leftrightarrow (L \geq b) \qquad \text{($z = 1$ only if $L \geq b$)}$$
-Let \textit{s} be the smallest value that L can achieve and set $m = s - b$
+Let \textit{s} be the smallest value that L can achieve and set $m = s - b$. Linearly:
 $$ L + m \times z \geq m + b$$
 
+These two idioms can be used as building blocks for many more:
+
+\paragraph{NAND \\} 
+
+Let $L_1$ and $L_2$ be linear functions whose variables are bounded, and $L_1 \geq b_1$ and $L_2 \geq b_2$ . We require that
+at \textit{most} one of the two linear inequalities is satisfied.
+
+$$z_1 + z_2 \leq 1 $$
+Where $z_1 = 1$ if $L_1 \geq b_1$ and $z_2 = 1$ if $L_2 \geq b_2$. We use the \textit{If-Then} twice idiom to express these two conditions.
+
+\paragraph{OR \\}
+Here we require that at \textit{least} one of the two linear inequalities is satisfied.
+$$z_1 + z_2 \geq 1 $$
+Followed by two \textit{Only-If} idioms to express $z_1 = 1$ \textit{only} if $L_1 \geq b_1$ and $z_2 = 1$ \textit{only} if $L_2 \geq b_2$.
+
+If $L_1, L_2 > 0$ it reduces to:
+$$ $$
+$$ $$
+
+\paragraph{XOR \\}
+
+\paragraph{Implied Satisfaction \\}
+
+\paragraph{Not-Equal}
