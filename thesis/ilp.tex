@@ -69,14 +69,14 @@ Suppose \textit{L} is an integer linear function of binary variables with \texti
 
 \paragraph{If-Then}
 
-$$ L \geq b \rightarrow z \qquad \text{(If $L \geq  b $ then $z = 1$)}$$
+$$ L \geq b \rightarrow z$$
 Linearly:
 $$ L - (M \times z) \leq  b - 1$$
 
 
 \paragraph{Only-If}
 
-$$z \leftrightarrow (L \geq b) \qquad \text{($z = 1$ only if $L \geq b$)}$$
+$$ \text{$z = 1$ only if $L \geq b$}$$
 Let \textit{s} be the smallest value that L can achieve and set $m = s - b$. Linearly:
 $$ L + m \times z \geq m + b$$
 
@@ -95,12 +95,32 @@ Here we require that at \textit{least} one of the two linear inequalities is sat
 $$z_1 + z_2 \geq 1 $$
 Followed by two \textit{Only-If} idioms to express $z_1 = 1$ \textit{only} if $L_1 \geq b_1$ and $z_2 = 1$ \textit{only} if $L_2 \geq b_2$.
 
-If $L_1, L_2 > 0$ it reduces to:
-$$ $$
-$$ $$
 
 \paragraph{XOR \\}
+If we want \textit{exactly} one of the inequalities to be satisfied:
+
+$$z_1 + z_2 = 1$$
+
+Again, followed by two \textit{Only-If} idioms to express $z_1 = 1$ \textit{only} if $L_1 \geq b_1$ and $z_2 = 1$ \textit{only} if $L_2 \geq b_2$ and two \textit{If-Then} (if and only if).
 
 \paragraph{Implied Satisfaction \\}
+To express
+$$ L_1 \geq b_1 \rightarrow L_2 \geq b_2$$
+We need an \textit{If-Then} idiom for the first equality, an \textit{Only-If} idiom for the second and
 
-\paragraph{Not-Equal}
+$$z_1 \leq z_2$$
+
+\paragraph{Not-Equal \\}
+
+Suppose $Z_1$ and $Z_2$ are linear functions of integer variables whose values are bounded. Then $Z_1 - Z_2$ and $Z_2 - Z_1$ are bounded to integer values, too. Then, we can express
+$$Z_1 \neq Z_2$$
+as
+$$(Z_1 - Z_2 \geq 1) \text{ OR } (Z_2 - Z_1 \geq 1) $$
+
+Using our \textit{OR} idiom previously explained: let $s_1$ the lower bound for $Z_1 - Z_2$ and $s_2$ the lower bound for $Z_2 - Z_1$.
+Set  $m_1 = s_1 - 1$ and $m_2 = s_2 - 1$. The final inequalities will be
+
+$$(Z_1 - Z_2) + m_1 \times l_1 \geq m_1 + 1$$
+$$(Z_2 - Z_1) + m_2 \times l_2 \geq m_2 + 1$$
+$$ l_1 + l_2 \geq 1 $$
+
