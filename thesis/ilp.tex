@@ -21,9 +21,9 @@ In contrast to linear programming, which can be solved efficiently in the worst 
 
 \section{In Computational Biology}
 
-At its inception, the focus of Computational Biology was on the development of efficient algorithms and data structures that were able to deal with the data being introduced in life science applications. Lately, the introduction of high throughput methods for biomedical data analysis and the rise of Systems Biology (the study of systems of biological components) made Statistical Learning approaches a standard.
+At its inception, the focus of Computational Biology was on the development of efficient algorithms and data structures that were able to deal with the data being introduced in life science applications. Lately, the introduction of high throughput methods for biomedical data analysis and the rise of Systems Biology (the study of systems of biological components) made Statistical Learning approaches a standard \cite{ilpinb}.
 
-Furthermore, new and accessible sequencing methods caused the quantity of the data produced to grew exponentially.
+Furthermore, new and accessible sequencing methods caused an exponential growth of the available genomic data.
 
 This element and the fact that biological processes are usually reduced and studied as simulations (because the actual nature of them is still being investigated, as in the case of our problem) lead to the introduction of a lot new optimization problems in the field.
 
@@ -31,39 +31,24 @@ In most cases, these optimisazion problems are discrete ones: hence the success 
 
 \subsection{Advantages}
 
-There are a number of additional reasons why ILP should be taken into consideration, even when the problems seems to not require it or the advantage of introducing an ILP formulation isn't initally clear:
+There are a number of additional reasons why ILP should be taken into consideration, even when the problems seems to not require it or the advantage of introducing an ILP formulation isn't initally clear\cite{gusfieldilp}:
 
 \begin{itemize}
-	\item Commercial ILP \textit{solvers} are available;
+	\item Commercial ILP \textit{solvers} are available (with academic licenses);
 	\item The progress of those solvers has been spectacular: benchmark ILP problems can be solved \textit{200-bilion} times faster than twenty-years ago;
 	\item Even for a problem where a worst-case efficient general algorithm might be possible, the time and effort needed to find it, implement it as a computer program, is typically much greater than the time and effort needed to formulate and implement an ILP solution to the problem.
 	\item Some problems can be modeled in a much more efficient with ILP.
 \end{itemize}
 
-\section{An real-world case: Multiple Sequence Alignment}
 
-This is a classical situation where dynamic programming can be exploited: the problem was initially treated exposing the similarities and differences of the given set of sequences by calculating a two-dimensional matrix where each row represents a sequence and the columns exhibit their common patterns and their differences.
-
-To evaluate the quality of alignments, a large number of scoring functions has been suggested, leading to this definition:
-
-\textbf{Problem (MSA):} \, Given a set of sequences and a scoring function, calculate an alignment of the sequences that is optimal with respect to the scoring function.
-
-The runtime and storage requirements of such approach are very limiting and exponentially growing when raising the number of the sequences: an instance of the problem with 10 of them was, and still is, a real challenge, while in many realistic applications users would like to compare dozens of sequences[citation].
-
-A variant of this problem is the Maximum Weight Trace problem (MWT), introduced by John Kececioglu [quotation needed].
-
-\textbf{Problem (MWT):} \, [MWT brief description]
-
-
-Every Multiple Sequence Alignment problem can be cast using this formulation.
-
-In 1997, Reinert et al. [quotation needed] proposed an ILP formulation for MWT
+\subsection{A typical approach}
+Usually, 
 
 \section{Design of an ILP formulation}
 
 \subsection{Idioms}
 
-Here's how many logic expressions can be expressed as linear disequalities without side effects or uncovered cases.
+Here's how many logic expressions can be expressed as linear disequalities without side effects or uncovered cases \cite{gusfieldilp}.
 
 Suppose \textit{L} is an integer linear function of binary variables with \textit{M} being its upper limit and \textit{b} a positive integer. Many of these idioms can be reduced if some or all variables are binary, strictly positive, or bounded.
 
