@@ -19,10 +19,15 @@ If the variables are forcibly constrained to be integers, we call the program \t
 
 A particular case of integer linear programming is represented by Combinatorial Optimization (CO), that is the class of problems in which the feasible region is a subset of the vertices of the unit hypercube $F \subseteq \textbf{B}^{n} = \{0,1\}^{n} $, i.e., more simply, problems in which variables can only take value 0 or 1. Linear \{0,1\} (or binary) programming problems belong to this class \cite{ro-malucelli}.
 
-In contrast to linear programming, which can be solved efficiently in the worst case, integer programming problems are in many practical situations (bounded variables) NP-hard. Binary Integer Programming problems are classified as NP-hard too ("0–1 integer programming" is one of the \textit{Karp's 21 NP-complete problems}).
+In contrast to linear programming, which can be solved efficiently in the worst case, integer programming problems are in many practical situations (bounded variables) NP-hard and no general algorithm is known. Binary Integer Programming problems are classified as NP-hard too: "0–1 integer programming" is one of the \textit{Karp's 21 NP-complete problems}.
 
 \section{Algorithms}
-
+There are three main categories of algorithms for solving integer linear programming problems \cite{ilpalg}:
+\begin{itemize}
+	\item \textsc{Exact} algorithms that guarantee to find an optimal solution, but may take an exponential number of iterations. They include cutting-planes, branch-and-bound, and dynamic programming.
+	\item \textsc{Heuristic} algorithms that provide a suboptimal solution, but without a guarantee on its quality. Although the running time is not guaranteed to be polynomial, empirical evidence suggests that some of these algorithms find a good solution fast.
+	\item \textsc{Approximation} algorithms that provide in polynomial time a suboptimal solution together with a bound on the degree of sub-optimality.
+\end{itemize}
 
 \section{In Computational Biology}
 
@@ -48,7 +53,7 @@ There are a number of additional reasons why ILP should be taken into considerat
 	\item A new mathematical formulation for classic problems may be studied, allowing the original one to be attacked in new ways. New techniques and relaxations can be applied.
 \end{itemize}
 
-To give a real example, the deeply studied \textsc{Multiple Sequence Alignment} problem \cite{carrillo1988multiple} shows how many different approaches and formulations can be theorised and exploited: tt was reformulated as an optimisation problem introducing the concept of \textit{trace} in \cite{Kececioglu1993}, given branch-and-cut algorithms in \cite{KECECIOGLU2000143} and relaxations, such as \cite{Althaus2007}, which proposes a branch-and-bound algorithm with a Lagrangian relaxation. 
+To give a real example, the deeply studied \textsc{Multiple Sequence Alignment} problem \cite{carrillo1988multiple} shows how many different approaches, versions and formulations can be theorised and exploited: tt was reformulated as an optimisation problem introducing the concept of \textit{trace} in \cite{Kececioglu1993}, given branch-and-cut algorithms in \cite{KECECIOGLU2000143} and relaxations, such as \cite{Althaus2007}, which proposes a branch-and-bound algorithm with a Lagrangian relaxation. 
 
 Among others, \cite{NET:NET10022} reduce the multiple alignment problem to the minimum routing cost tree (MRCT) problem, i.e., finding a spanning tree in a complete weighted graph, which minimizes the sum of the distances between each pair of nodes. They propose a Branch-and-Price algorithm for the MRCT problem and then use it. \cite{DBLP:conf/stringology/JustV00} reduce multiple sequence alignment to a facility location problem. The reduction is then used to provide a Polynomial Time Approximation Scheme for a certain class of multiple alignment problems.
 
