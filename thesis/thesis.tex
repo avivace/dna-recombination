@@ -1,4 +1,4 @@
-\documentclass[12pt]{report}
+\documentclass[12pt,a4paper]{report}
 
 \usepackage{url}
 \usepackage{hyperref}
@@ -7,7 +7,10 @@
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{graphicx}
-\usepackage{ relsize } 
+\usepackage{relsize} 
+\usepackage{wrapfig}
+\usepackage{setspace}
+\usepackage[utf8]{inputenc}
 
 \usepackage[font=footnotesize, labelfont=bf]{caption}
 
@@ -18,12 +21,12 @@
 \definecolor{gray75}{gray}{0.75}
 \titleformat{\chapter}[hang]{\Huge\bfseries}{\thechapter\hsp\textcolor{gray75}{|}\hsp}{0pt}{\Huge\bfseries}
 \newcommand{\hsp}{\hspace{20pt}}
-\newcommand{\code}{\texttt} 
+\newcommand{\code}{\texttt}
 
 
 \begin{document}
 
-\includepdf[pages={1}]{front_serif_1617.pdf}
+\input{front}
 \input{abstract}
 
 \tableofcontents

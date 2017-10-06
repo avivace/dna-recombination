@@ -26,7 +26,7 @@ Many discrete and topological models, mathematical approaches, biological and bi
 \begin{figure}[h]
   \centering
     \includegraphics[width=\textwidth]{1}
-  \caption{Schematic representation of the scrambled Actin I micronuclear germline gene in Oxytricha nova (top) and the correctly assembled macronuclear gene (bottom). Each block represents an MDS, and each line between blocks is an IES. The numbers at the beginning and at the end of each segment represent the pointer sequences. Note that MDS3· · ·MDS8 require permutation and inversion to assemble into the orthodox, linear order MDS1· · ·MDS9 in the macronucleus. The bars above MDS2 and its pointers indicate that this block is inverted relative to the others, i.e., this sequence is the Watson - Crick reverse complement of the version in the macronucleus; from\cite{prescottgreslin}.}
+  \caption{Schematic representation of the scrambled Actin I micronuclear germline gene in Oxytricha nova (top) and the correctly assembled macronuclear gene (bottom). Each block represents an MDS, and each line between blocks is an IES. The numbers at the beginning and at the end of each segment represent the pointer sequences. Note that MDS3-MDS8 require permutation and inversion to assemble into the orthodox, linear order MDS1-MDS9 in the macronucleus. The bars above MDS2 and its pointers indicate that this block is inverted relative to the others, i.e., this sequence is the Watson - Crick reverse complement of the version in the macronucleus; from\cite{prescottgreslin}.}
 
 \end{figure}
 
@@ -43,13 +43,34 @@ The recognised events in the rearrangement process are:
 	\begin{itemize}
     	\item Elimination
     	\item Inversion
-    	\item Gene Scrambling / Unscrambling
+    	\item Gene Scrambling - Unscrambling
     	\item Telomere Addition
     \end{itemize}
 
 \end{itemize}
 
+We focus on the second phase, trying to map the following "building blocks":
+
+\begin{itemize}
+	\item \textbf{MDSs}, the contiguous sequences copied, inverted or (order) scrambled in the MAC;
+	\item \textbf{IESs}, sections not present in the MAC;
+	\item \textbf{Pointers}, overlap sections between MDSs in the MAC (maybe inverted), present in multiple copies in the MIC;
+\end{itemize}
+
+With "inverse", "reverse", "reverse complement" terms we refer to the \textit{Watson-Crick reverse complement} of the sequence.
+
+The goal is to produce a \textit{rearrangement map}: a set of disjoint substrings representing the building blocks, eventual operations they will go through the process (scrambling, inversion) and their "destination" on the produced genome.
+
+\subsection{Instance}
+
+
+
 \section{Existent Approaches}
 
-\section{ILP formulation}
+
+\section{Formulation}
+
+\subsection{Reduced Instance}
+\subsection{ILP}
 \input{formulation}
+\subsection{Preprocessing}
