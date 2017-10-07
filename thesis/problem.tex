@@ -57,20 +57,32 @@ We focus on the second phase, trying to map the following "building blocks":
 	\item \textbf{Pointers}, overlap sections between MDSs in the MAC (maybe inverted), present in multiple copies in the MIC;
 \end{itemize}
 
-With "inverse", "reverse", "reverse complement" terms we refer to the \textit{Watson-Crick reverse complement} of the sequence.
+The "inverse", "reverse", "reverse complement" terms refer to the \textit{Watson-Crick reverse complement} of the sequence.
 
 The goal is to produce a \textit{rearrangement map}: a set of disjoint substrings representing the building blocks, eventual operations they will go through the process (scrambling, inversion) and their "destination" on the produced genome.
 
-\subsection{Instance}
+\subsection{Real Instance}
 
+Ideally, we want to reach an approach capable of treating the entire MAC and MIC sequenced genomes of \textit{Oxytricha trifallax} or \textit{Tetrahymena thermophila}, available publicy \href{http://oxytricha.princeton.edu/mds_ies_db/}{online} in the \textsc{mds\_ies\_db} ("A database of macronuclear and micronuclear genes in spirotrichous ciliates" \cite{mdsiesdb}).
 
+\textit{Oxytricha trifallax} has a 487.14 000 000 M long MIC sequence, rearranging in a 71.47 M characters long MAC \cite{mdsiesdb}.
+
+Formally, given an initial genome(MIC or MAC precursor) and a rearranged one (MAC) the program produces an annotation map of the process the input has been through.
 
 \section{Existent Approaches}
 
+\cite{mdsiesdb} proposes an annotation map, built using this algorithm:
+
+\cite{ANGELESKA20093020} 
 
 \section{Formulation}
 
-\subsection{Reduced Instance}
+\subsection{Reduced Artificial Instance}
+Working on the entire genomes would be prohibitive for such approach, and many of the existent solutions make assumptions on the nature of the genomes, as we've seen.
+
+We take into consideration a reduced instace, designing a Python script which procedually generates an instance of the problem with given specific characteristics.
+
+\subsection{Preprocessing}
 \subsection{ILP}
 \input{formulation}
-\subsection{Preprocessing}
+\subsection{GUROBI Implementation}
