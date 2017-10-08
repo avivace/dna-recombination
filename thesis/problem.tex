@@ -71,6 +71,28 @@ Formally, given an initial genome(MIC or MAC precursor) and a rearranged one (MA
 
 \section{Existent Approaches}
 
-\cite{mdsiesdb} proposes an annotation map, built using this algorithm:
+\paragraph{mds-ies-db}\cite{mdsiesdb} proposes an annotation map, presuming the MDSs general pattern (using regular expressions) and using the Basic Local Alignment Search Tool (BLAST \cite{boratyn2013blast}) to flag matching regions.
 
-\cite{ANGELESKA20093020} 
+The algorithm is the following:
+
+\begin{enumerate}
+  \item Use provided regular expression to mask macronuclear telomeric sequences.
+  \item Blast MAC sequences against MIC sequences.
+  \item Process obtained high scoring pairs list resolving overlaps to obtain initial MDS annotation.
+  \item Blast MAC sequences against MIC sequences again.
+  \item Use obtained high scoring pairs to fill gaps in the initial MDS annotation and get final MDS annotation for MAC.
+  \item Output final MDS/IES annotation for MAC and MIC.
+\end{enumerate}
+
+An example regular expression used in step \textbf{1} is \texttt{A{0,4}(CCCCAAAA)+C{0,4}}.
+During step \textbf{2}, long (at least 28 nucletides) high scoring pairs (HSPs) are found using BLAST. Next, in step \textbf{3} overlapping HSPs are merged (if they overlap at least 50\%).
+Step \textbf{4} makes sure that no portion of the MAC sequnces remains uncovered, using BLAST with lower requirements (at least 12 nucletides) that can potentially fill the gaps.
+Finally, MIC sub-sequences that are in between HSPs are considered IESs.
+
+
+\paragraph{}
+In \textbf{DNA Recombination through Assembly Graph}\cite{ANGELESKA20093020}, the notion of \textit{assembly graph} is introduced TODO
+
+\paragraph{}
+The recent \textbf{Sorting by Reversals and the Theory of 4-Regular Graphs} \cite{DBLP:journals/corr/Brijder17} shows an interesting approach in describing the \textit{Reversal} evolutionary event and illustrates its correlation to the DNA recombination problem found in ciliates TODO
+

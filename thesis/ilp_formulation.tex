@@ -1,4 +1,5 @@
 \subsection{Variables definitions}
+
 Variables marked with $*$ will be populated during the preprocessing phase. \\\\\\
 $*Eq(i,j,h,l) = \begin{cases} 0 \\ 1, & \mbox{if } \code{MIC[i:j]} = \code{MAC[h:l]} \end{cases}$ \\\\\\
 $*cwc(i,j,h,l) = \begin{cases} 0 \\ 1, & \mbox{if \code{MIC[i:j]} is the reverse complement of \code{MAC[h:l]}} \end{cases}$ \\\\\\
@@ -9,6 +10,7 @@ $MDS_{MACend}(i,j) = \begin{cases} 0 \\ 1, & \mbox{if MDS } i\mbox{ ends at posi
 $Inv(i) = \begin{cases} 0 \\ 1, & \mbox{if MDS } i\mbox{ is inverted in the MAC } \end{cases}$ \\\\\\
 $P_{start}(i,j) = \begin{cases} 0 \\ 1, & \mbox{if } MDS_{MACstart}(i,j) = 1 \mbox{, Pointer } i \mbox{ starts at position } j \mbox{ in the MAC} \end{cases}$ \\\\\\
 $P_{end}(i,j) = \begin{cases} 0 \\ 1, & \mbox{if } MDS_{MACend}(i-1,j) = 1 \mbox{, Pointer } i \mbox{ ends at position } j \mbox{ in the MAC} \end{cases}$ \\\\\\
+$Cov_{MACPOINT}(i,j) = \begin{cases} 0 \\ 1, & \mbox{if Pointer i covers the position j in the MAC} \end{cases}$ \\\\\\
 $*MAC(i,c) = \begin{cases} 0 \\ 1, & \mbox{if } c\mbox{ is the character at position } i \mbox{ in the MAC} \end{cases}$ \\\\\\
 $*MIC(i,c) = \begin{cases} 0 \\ 1, & \mbox{if } c\mbox{ is the character at position } i \mbox{ in the MIC} \end{cases}$ \\\\\\
 $Cov_{MIC}(i,j) = \begin{cases} 0 \\ 1, & \mbox{if MDS } i\mbox{ covers the position } j \mbox{ in the MIC} \end{cases}$ \\\\\\
@@ -19,7 +21,6 @@ $\mbox{Objective Function:} \qquad min \mathlarger{\sum_{i,j} MDS_{MACstart}(i,j
 % or maximise mac coverage?
 
 \subsection{Constraints}
-
 
 \paragraph{MDS integrity and validity}MDSs must correspond to identical or reverse and complemented substrings of MIC and MAC. The following constraints enforce this fact:
 \\\\\\
@@ -33,4 +34,6 @@ $\mathlarger{\sum_{j} MDS_{MICend}(i,j) = \sum_{j} MDS_{MICstart}(i,j)}$ \\\\\\
 $\mathlarger{\sum_{l\leq j} MDS_{MICstart}(i,l) + \sum_{l\geq j}MDS_{MICend}(i,l) - 2Cov_{MIC}(i,j) = 0}$ \\\\\\
 $\mathlarger{\sum_{l\leq j} MDS_{MACstart}(i,l) + \sum_{l\geq j}MDS_{MACend}(i,l) - 2Cov_{MAC}(i,j) = 0}$ \\\\\\
 
-\paragraph{Pointer Regions}
+\paragraph{Pointer Regions} $ $
+\\\\\\
+$ TODO $

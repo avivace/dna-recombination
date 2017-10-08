@@ -24,7 +24,7 @@ In contrast to linear programming, which can be solved efficiently in the worst 
 \section{Algorithms}
 There are three main categories of algorithms for solving integer linear programming problems \cite{ilpalg}:
 \begin{itemize}
-	\item \textsc{Exact} algorithms that guarantee to find an optimal solution, but may take an exponential number of iterations. They include cutting-planes, branch-and-bound, and dynamic programming.
+	\item \textsc{Exact} algorithms that guarantee to find an optimal solution, but may take an exponential number of iterations. They include cutting-planes, branch-and-bound, and dynamic programming. TODO
 	\item \textsc{Heuristic} algorithms that provide a suboptimal solution, but without a guarantee on its quality. Although the running time is not guaranteed to be polynomial, empirical evidence suggests that some of these algorithms find a good solution fast.
 	\item \textsc{Approximation} algorithms that provide in polynomial time a suboptimal solution together with a bound on the degree of sub-optimality.
 \end{itemize}
@@ -59,17 +59,18 @@ Among others, \cite{NET:NET10022} reduce the multiple alignment problem to the m
 
 The history of the problem, biological motivations and uses along with many approaches are discussed in \textit{Multiple String Comparison - The Holy Grail}, in \cite{Gusfield:1997:AST:262228}.
 
-\subsection{A typical approach}
-Usually, 
-
-
 \section{Design of an ILP formulation}
+
+A computational biology problem is generally tackled in this way:
+
+First, a modeling analysis is perfomed, trying to describe and formalise the underlying biological process into one or more combinatorial objects. The question concerning the biological data is now a mathematical question about the chosen objects. Each object representing a tentative solution has a numerical value associated to it (computed using the \textit{cost} or \textit{objective} function) to measure its quality. We want to find a solution $x^*$ which \textit{maximizes} (or \textit{minimizes}, based on the formulation) $f(x)$ over all the other possible solutions.
+
 
 \subsection{Idioms}
 
 Here's how many logic expressions can be expressed as linear disequalities without side effects or uncovered cases \cite{gusfieldilp}.
 
-Suppose \textit{L} is an integer linear function of binary variables with \textit{M} being its upper limit and \textit{b} a positive integer. Many of these idioms can be reduced if some or all variables are binary, strictly positive, or bounded.
+Suppose \textit{L} is an integer linear function of binary variables with \textit{M} being its upper limit and \textit{b} a positive integer.
 
 \paragraph{If-Then}
 
@@ -127,3 +128,5 @@ Set  $m_1 = s_1 - 1$ and $m_2 = s_2 - 1$. The final inequalities will be
 $$(Z_1 - Z_2) + m_1 \times l_1 \geq m_1 + 1$$
 $$(Z_2 - Z_1) + m_2 \times l_2 \geq m_2 + 1$$
 $$ l_1 + l_2 \geq 1 $$
+
+Many of these idioms can be reduced if some or all variables are binary, strictly positive, or bounded.

@@ -16,14 +16,35 @@ Working on the entire genomes sequences would be prohibitive for such approach, 
 
 We take into consideration a reduced instace, designing a Python script which procedually generates an instance of the problem with given specific characteristics.
 
+This generator script takes the following parameters to shape the wanted instance:
+
+\begin{itemize}
+	\item MIC length
+	\item MDS range quantity
+	\item Overlap size
+	\item Inversing rate
+\end{itemize}
+
+Running \texttt{\$ python3 gen.py} produces an instance consisting in:
+
+\begin{itemize}
+	\item A (randomised) MIC DNA sequence
+	\item A rearrangement map containing positions, inversion flags and annotation for every MDS, Pointer in both MIC and MAC
+	\item The resulting MAC sequence
+\end{itemize}
+
 \section{Preprocessing}
-TODO
+This part of the software computes the value for some of the variables, taking the instance as input.
+
+Some of the defined variables are \textit{4-dimensions MIC length * MIC length * MAC length * MAC length} arrays. The need of a sparse data structure was immediatly clear: TODO
+
 
 \section{ILP}
 \input{ilp_formulation}
 
 \section{GUROBI Implementation}
 TODO
+
 \section{Proof of correctness}
 
 \begin{lemma}
