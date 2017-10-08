@@ -1,11 +1,39 @@
+The entire software and documentation produced during the Stage experience and the thesis drafting, including initial and discarded attempts are hosted in a public Git \href{https://github.com/avivace/dna-recombination}{repository} on GitHub.
+
 \section{Tools}
+The sperimental work of the Stage experience was done on a GNU/Linux Debian \texttt{buster/sid} workstation, making large of use of the shell and other tools:
+
+\texttt{Git}, a distributed version control system, helped to keep track of every progress in the documents and the software produced.
+
+\texttt{Python} \cite{Rossum:1995:PRM:869369} and its \texttt{IDLE} was used to quickly implement and experiment the algorithms and procedures. It's also the interface to the Gurobi interactive shell. \texttt{Ruby} was considered too.
+
+\texttt{Gurobi Optimizer} \cite{gurobi} is a commercial optimization solver. It provides a Python interface to formulate linears problem and solve them in Python software.
+
+The \texttt{TeX} typesetting engine (in the \texttt{LaTex} macros environment, with some some extensions like \texttt{BiBTex} and the \texttt{pdflatex} compiler) were used to produce the documentation, the thesis and the slides.
+
 \section{Reduced artificial instance}
-Working on the entire genomes would be prohibitive for such approach, and many of the existent solutions make assumptions on the nature of the genomes, as we've seen.
+Working on the entire genomes sequences would be prohibitive for such approach, and many of the existent solutions make assumptions on the nature of the genomes, as we've seen.
 
 We take into consideration a reduced instace, designing a Python script which procedually generates an instance of the problem with given specific characteristics.
 
 \section{Preprocessing}
-Preprocessing script explanation
+TODO
+
 \section{ILP}
 \input{ilp_formulation}
+
 \section{GUROBI Implementation}
+TODO
+\section{Proof of correctness}
+
+\begin{lemma}
+Suppose
+
+$I$ to be an instance of the problem,
+
+$P$ to be the ILP formulation associated to $I$,
+
+$S$ to be an assignment to every variable of $P$ satisfying the constraints.
+
+Then it's possible to build a solution for $I$ with cost equal to the objective function in $S$.
+\end{lemma}
