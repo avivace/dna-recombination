@@ -4,8 +4,8 @@
 from __future__ import division
 from __future__ import print_function
 import random 
+from random import shuffle
 from gurobipy import *
-
 
 class sparray(object):
 	def __init__(self, shape, default=0, dtype=int):
@@ -26,17 +26,25 @@ def reverse_complement(dna):
 	return ''.join([complement[base] for base in dna[::-1]])
 
 ### Artificially generate a basic instance of the problem
-## TODO: Add overlapping regions (pointers)
 
 mic = ""
 mac = ""
 
 numNotation = {1: 'A', 2: 'C', 3: 'G', 4: 'T'}
 
-# Generator Parameters
+def inverted_char(inverted, char):
+	if (inverted):
+		return char
+	else:
+		return ""
+## Generator Parameters
+# MIC length
 micl = 50
-MDSn = random.randint(2,6)
-# inverseRate
+# MDS Quantity
+MDSn = random.randint(2,5)
+# Rate of Inversion: 1 will give 10% of chance to any MDS 
+#  to be inverted in the MAC, 10 will make every MDS inverted
+inverseRate = 5
 # overlapQuantity
 
 # Generate MIC
@@ -48,19 +56,52 @@ while (i<micl):
 
 MDSin = 0
 m = 0
+
+print("Generated instance:\n")
+print("MDS\tStart\tEnd")
+end = 0
+MDS = [{}] * MDSn
+
 while (m < MDSn):
-	startOffset = random.randint(2, int(micl/MDSn))
-	length = random.randint(1,5)
-	inverse = random.randint(0,4)
-	if (inverse == 4):
-		mac = mac + reverse_complement(mic[int(startOffset+(micl/MDSn)*m):int(startOffset+(micl/MDSn)*m)+length])
-		MDSin = MDSin + 1
+	inverted = ""
+	# 2,5 ~ 10% micl
+	space = random.randint(2, 5)
+	# 10 ~ 20% micl
+	length = random.randint(5, 10)
+	inverse = random.randint(0, 10-inverseRate)
+	if (inverse == 0):
+		inverted_flag = 1
 	else:
-		mac = mac + mic[int(startOffset+(micl/MDSn)*m):int(startOffset+(micl/MDSn)*m)+length]
-	print("MDS",m,"",int(startOffset+(micl/MDSn)*m), ":", int(startOffset+(micl/MDSn)*m)+length)
+		inverted_flag = 0
+	start = end + space
+	end = start + length
+	MDS[m] = { 'start': start, 'end': end, 'inverted': inverted_flag}
 	m+=1
 
-macl = len(mac) 
+shuffle(MDS)
+m = 0
 
-print("Generated instance:")
-print("MIC:",micl,"MAC:", macl,"-", MDSn, "MDSs,", MDSin, "inverted")
+while m < MDSn :
+	print(str(m)+inverted_char(MDS[m]["inverted"], "*")+"\t"+str(MDS[m]["start"])+"\t"+str(MDS[m]["end"])+"\t")
+	m+=1
+
+print("\nP\tStart1\tEnd1\tStart2\tEnd2")
+
+m = 1
+P = [{}] * MDSn
+
+while m < MDSn :
+	length = int(((MDS[m-1]["end"]-MDS[m-1]["start"])/100)*50)
+	P[m] = { 'start1' : (MDS[m-1]["end"] - length),
+			 'end1': MDS[m-1]["end"],
+			 'start2': MDS[m]["start"],
+			 'end2': MDS[m]["start"] + length
+			}
+	print(str(m)+"\t"+str(P[m]["start1"])+"\t"+str(P[m]["end1"])+"\t"+str(P[m]["start2"])+"\t"+str(P[m]["end2"]))
+	# l = 30% of MDS m-1 lenght
+	m+=1
+
+# Build the sequences
+
+mic = "I" * 50
+print(mic)
