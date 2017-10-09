@@ -28,7 +28,6 @@ def reverse_complement(dna):
 ### Artificially generate a basic instance of the problem
 ## TODO: Add overlapping regions (pointers)
 
-print("Generated instance:")
 mic = ""
 mac = ""
 
@@ -37,6 +36,8 @@ numNotation = {1: 'A', 2: 'C', 3: 'G', 4: 'T'}
 # Generator Parameters
 micl = 50
 MDSn = random.randint(2,6)
+# inverseRate
+# overlapQuantity
 
 # Generate MIC
 i = 0
@@ -61,6 +62,7 @@ while (m < MDSn):
 
 macl = len(mac) 
 
+print("Generated instance:")
 print("MIC:",micl,"MAC:", macl,"-", MDSn, "MDSs,", MDSin, "inverted")
 
 mac_i = reverse_complement(mac)

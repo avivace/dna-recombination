@@ -18,7 +18,6 @@ $Cov_{MAC}(i,j) = \begin{cases} 0 \\ 1, & \mbox{if MDS } i\mbox{ covers the posi
 $IES(j) = \begin{cases} 0 \\ 1, & \mbox{if } i \mbox{ is part of an IES:} \mathlarger{\sum_{0 \leq i \leq q} Cov_{MIC}(i,j) = 0} \end{cases}$ \\\\\\
 
 $\mbox{Objective Function:} \qquad min \mathlarger{\sum_{i,j} MDS_{MACstart}(i,j)}$
-% or maximise mac coverage?
 
 \subsection{Constraints}
 
@@ -26,8 +25,8 @@ $\mbox{Objective Function:} \qquad min \mathlarger{\sum_{i,j} MDS_{MACstart}(i,j
 \\\\\\
 $MDS_{MICstart}(i,a) + MDS_{MICend}(i,b) + MDS_{MACstart}(i,c) + MDS_{MACend}(i,d) + Inv(i) \leq 5 cwc(a,b,c,d)$ \\\\\\
 $MDS_{MICstart}(i,a) + MDS_{MICend}(i,b) + MDS_{MACstart}(i,c) + MDS_{MACend}(i,d) \leq 4 Eq(a,b,c,d)$ \\\\\\
-$\mathlarger{\sum_{j} MDS_{MICstart}(i,j)\leq 1}$ \\\\\\
-$\mathlarger{\sum_{j} MDS_{MICend}(i,j) = \sum_{j} MDS_{MICstart}(i,j)}$ \\\\\\
+$\mathlarger{\sum_{j} MDS_{MICstart}(i,j)\leq 1 \qquad \forall i}$ \\\\\\
+$\mathlarger{\sum_{j} MDS_{MICend}(i,j) = \sum_{j} MDS_{MICstart}(i,j) \qquad \forall i}$ \\\\\\
 
 \paragraph{Coverage} $ $
 \\\\\\
@@ -36,4 +35,13 @@ $\mathlarger{\sum_{l\leq j} MDS_{MACstart}(i,l) + \sum_{l\geq j}MDS_{MACend}(i,l
 
 \paragraph{Pointer Regions} $ $
 \\\\\\
-$ TODO $
+$P_{start}(i,j) = MDS_{MACStart}(i,j) \qquad \forall i \neq 1$ \\\\\\
+$P_{end}(i,j) = MDS_{MACEnd}(i-1,j) \qquad \forall i \neq 1$ \\\\\\
+$Cov_{MACPOINT}(i,j) = \mathlarger{\sum_{b \geq j} P_{start}(i,b) + \sum_{e < j} P_{end}(i,e) \qquad \forall i}$ \\\\\\
+$\mathlarger{\sum_{i} Cov_{MAC}(i,j) \geq 1 \qquad \forall j }$ \\\\\\
+$\mathlarger{\sum_{i} Cov_{MAC}(i,j) \leq 2 \qquad \forall j }$ \\\\\\
+$\mathlarger{\sum_{i} Cov_{MAC}(i,j) - \sum_{i} Cov_{MACPOINT}(i,j) = 1 \qquad \forall j}$ \\\\\\
+
+% FIXME: <=, > not <= =>.
+% FIXME: remove unused 
+% TODO: Add "For every i" in constarints 3 and 4

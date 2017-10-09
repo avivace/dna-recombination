@@ -85,14 +85,19 @@ The algorithm is the following:
 \end{enumerate}
 
 An example regular expression used in step \textbf{1} is \texttt{A{0,4}(CCCCAAAA)+C{0,4}}.
+
 During step \textbf{2}, long (at least 28 nucletides) high scoring pairs (HSPs) are found using BLAST. Next, in step \textbf{3} overlapping HSPs are merged (if they overlap at least 50\%).
 Step \textbf{4} makes sure that no portion of the MAC sequnces remains uncovered, using BLAST with lower requirements (at least 12 nucletides) that can potentially fill the gaps.
 Finally, MIC sub-sequences that are in between HSPs are considered IESs.
 
+\paragraph{}
+The recent \textbf{Sorting by Reversals and the Theory of 4-Regular Graphs} \cite{DBLP:journals/corr/Brijder17} shows an interesting approach in describing the \textit{Reversal} evolutionary event and illustrates its correlation to the DNA recombination problem found in ciliates. The \textit{reversal distance} is defined as the least number of reversals required to accomplish the transformation (an efficient algorithm to compute this distance can be found in \cite{Hannenhalli}). The reversal event is then cast as a special case of double-cut-and-join (DCJ) operation (which can happen within a chromosome or between more of them). Similarly, a formula to compute the DCJ distance is given in \cite{Bergeron2006}.
+
+The problem of computing the distance between two permutations is often recast as the problem of computing $d(\pi)$, the reversal distance between a permutation $\pi$ and the identity permutation $(1 2 ... n)$. The reconstruction of one possible sequence of reversals that realizes $d(\pi)$ is called the \textit{sorting by reversals} problem.
+
+The gene assembly in ciliates is finally casted with the theory of sorting by reversals (although ignoring overlap sections).
+
+How 4-regular multigraphs, circle graphs and delta-matroids can be used to study gene assembly in ciliates it's further discussed in \cite{Brijder2014}.
 
 \paragraph{}
-In \textbf{DNA Recombination through Assembly Graph}\cite{ANGELESKA20093020}, the notion of \textit{assembly graph} is introduced TODO
-
-\paragraph{}
-The recent \textbf{Sorting by Reversals and the Theory of 4-Regular Graphs} \cite{DBLP:journals/corr/Brijder17} shows an interesting approach in describing the \textit{Reversal} evolutionary event and illustrates its correlation to the DNA recombination problem found in ciliates TODO
-
+\textbf{DNA Recombination through Assembly Graph}\cite{ANGELESKA20093020} takes a more elaborate combinatorial approach, introducing the notion of \textit{assembly graph} as a finite connected graph where all vertices are rigid vertices of valency 1 or 4. The recombination process is then modeled using polygonal paths, tranverse paths and smoothings.
