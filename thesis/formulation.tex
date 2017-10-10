@@ -78,7 +78,7 @@ Some of the defined variables are \textit{4-dimensional MIC length $\times$ MIC 
 
 The Read-Write performance on these objects is satisfying: 15 milion integer values are written in random indexes in a 150M $\times$ 150M $\times$ 150M $\times$ 150M \textit{4d sparray} in less than 20 seconds. The data can then be accessed using a notation similar to the standard array one (\texttt{Sparray[Index1, Index2, Index3, Index4]}). \textit{Eq} and {cwc} are populated during this phase, with a naive iterative algorithm.
 
-Here we encounter our first big limitation of a \textit{pure} linear programming approach. Populating Eq and cwc in our test instance (60 characters long MIC) was a question of seconds but this task becomes so expensive it's infeasible with even genome sequences of more than 1000 characters.
+Here we encounter our first big limitation of a \textit{pure} linear programming approach. Populating Eq and cwc in our test instance (60 characters long MIC) was trivial but this task becomes so expensive it's infeasible with even genome sequences of more than 1000 characters.
 
 The subsequences matching part must be approached with an high performing alignment tool like \textit{BLAST}.
 
