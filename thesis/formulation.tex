@@ -11,14 +11,15 @@ The sperimental work of the Stage experience was done on a GNU/Linux Debian \tex
 
 The \texttt{TeX} typesetting engine (in the \texttt{LaTex} macros environment, with some some extensions like \texttt{BiBTex} and the \texttt{pdflatex} compiler) were used to produce the documentation, the thesis and the slides.
 
+\section{List of produced software}
+TODO
+
 \section{Reduced artificial instance}
 Working on the entire genomes sequences would be prohibitive for such approach, and many of the existent solutions make assumptions on the nature of the genomes, as we've seen.
 
-We take into consideration a reduced instance, considering a shorter sequence and only the main events (Scrambling, Inversing, Overlapping).
+We take into consideration a reduced instance, considering a shorter sequence and only the main events (Scrambling, Inversion, Overlapping, Deletion).
 
-A Python script which \textit{procedually} generates an instance of the problem with given specific characteristics has been developed:
-
-This generator script takes the following parameters to shape the wanted instance:
+A Python script which \textit{procedually} generates an instance of the problem with given specific characteristics has been developed, it takes the following parameters to shape the desired instance:
 
 \begin{itemize}
 	\item MIC length
@@ -66,7 +67,19 @@ The parameters used were:
 	\item $30\%$ as Overlap size
 \end{itemize}
 
-The pointer regions are marked in both MIC and MAC. IESs are masked for clarity. The complete annotation map is exposed through four produced objects: \texttt{MDS\_MAC}, \texttt{MDS\_Mic}, \texttt{Pointer\_MIC} and \texttt{Pointer\_MAC}, easily navigable to fetch any information about the simulated process, e.g., \texttt{Pointer\_MIC[1]["Start2"]} and \texttt{Pointer\_MIC[1]["End2"]} gives the position of the second occurrence of the first pointer section in the MIC. A JSON object, serialising this data is produced, too.
+The pointer regions are marked in both MIC and MAC. IESs are masked for clarity. The complete annotation map is exposed through four produced objects: \texttt{MDS\_MAC}, \texttt{MDS\_Mic}, \texttt{Pointer\_MIC} and \texttt{Pointer\_MAC}, easily navigable to fetch any information about the simulated process, e.g., \texttt{Pointer\_MIC[1]["Start2"]} and \texttt{Pointer\_MIC[1]["End2"]} gives the position of the second occurrence of the first pointer section in the MIC. A standard JSON object, serialising this data, is produced, too.
+
+\subsection{(Proposed) Rearrangement map format specification}
+Here we formalise a simple rearrangement map format adopted in this work. A specification gives a coherent and reliable way interpret the events represented by the map. The necessity to \textit{apply} them on genomes and produce simulations is described in the \textit{correctness} section.
+
+The following events can be described:
+
+\begin{itemize}
+	\item Deletion.
+	\item Scrambling.
+	\item Overlapping of pointer sections. A pointer section is a sequence common to 2 MDSs. The pointer can appear inversed in one or both occurences.
+	\item Inversion. An MDS can appear in the resulting genome as the Watson-Creek reverse complement version of the one in the MIC.
+\end{itemize}
 
 \section{ILP}
 \input{ilp_formulation}
@@ -99,8 +112,21 @@ $S$ to be an assignment to every variable of $P$ satisfying the constraints.
 Then it's possible to build a solution for $I$ with cost equal to the objective function in $S$.
 
 \paragraph{Proof.}
-TODO
+The idea is checking if \textit{S} produced by Gurobi is compatible with the known rearrangement map of the instance, i.e., if the solution proposed by Gurobi represents our DNA recombination events. "Applying" the computed map to the instance MIC should build an exact copy of the MAC.
 
+The complete test workflow follows.
+
+\begin{enumerate}
+	\item Produce an \textit{artificial} instance \textit{I} of the problem with the software described in the \textit{Reduced artificial instance} section. By definition, this instance exhibits the rearrangement events we want to study (Scrambling, Overlapping, Deletion, Inversion) and it's a compliant instance of the formalised problem. A \textit{known} rearrangement map $R_1$ is produced too.
+	\item Run the preprocess script on the generated instance and populate some of the variables of the ILP formulation associated to \textit{I}
+	\item Run the Gurobi implementation of $P$ passing the populated variables. An assignment $S$ of every variable of the formulation will be computed.
+	\item Build a rearrangement map $R_2$ using $S$.
+	\item If $S$ is a solution then it $R_2$ maps the rearrangement events. It is possibile to simulate those events on the instance MIC and exactly obtain the MAC. $R_2$ is comparable with $R_1$.
+\end{enumerate}
+
+Step 1-4 are handled in the \texttt{ilp.py} script. Step 5 is covered in \texttt{map.py} where we provide a function that given an initial sequence and a (compliant) rearrangement map computes a final rearranged sequence.
+
+This entire procedure can be pipelined and automatized to allow running a variety of tests.
 
 \section{Conclusions}
 
