@@ -1,6 +1,5 @@
 \subsection{Variables definitions}
 
-Variables marked with $*$ will be populated during the preprocessing phase. \\\\\\
 $*Eq(i,j,h,l) = \begin{cases} 0 \\ 1, & \mbox{if } \code{MIC[i:j]} = \code{MAC[h:l]} \end{cases}$ \\\\\\
 $*cwc(i,j,h,l) = \begin{cases} 0 \\ 1, & \mbox{if \code{MIC[i:j]} is the reverse complement of \code{MAC[h:l]}} \end{cases}$ \\\\\\
 $MDS_{MICstart}(i,j) = \begin{cases} 0 \\ 1, & \mbox{if MDS } i\mbox{ starts at position } j \mbox{ in the MIC} \end{cases}$ \\\\\\
@@ -11,11 +10,8 @@ $Inv(i) = \begin{cases} 0 \\ 1, & \mbox{if MDS } i\mbox{ is inverted in the MAC 
 $P_{start}(i,j) = \begin{cases} 0 \\ 1, & \mbox{if } MDS_{MACstart}(i,j) = 1 \mbox{, Pointer } i \mbox{ starts at position } j \mbox{ in the MAC} \end{cases}$ \\\\\\
 $P_{end}(i,j) = \begin{cases} 0 \\ 1, & \mbox{if } MDS_{MACend}(i-1,j) = 1 \mbox{, Pointer } i \mbox{ ends at position } j \mbox{ in the MAC} \end{cases}$ \\\\\\
 $Cov_{MACPOINT}(i,j) = \begin{cases} 0 \\ 1, & \mbox{if Pointer i covers the position j in the MAC} \end{cases}$ \\\\\\
-$*MAC(i,c) = \begin{cases} 0 \\ 1, & \mbox{if } c\mbox{ is the character at position } i \mbox{ in the MAC} \end{cases}$ \\\\\\
-$*MIC(i,c) = \begin{cases} 0 \\ 1, & \mbox{if } c\mbox{ is the character at position } i \mbox{ in the MIC} \end{cases}$ \\\\\\
 $Cov_{MIC}(i,j) = \begin{cases} 0 \\ 1, & \mbox{if MDS } i\mbox{ covers the position } j \mbox{ in the MIC} \end{cases}$ \\\\\\
 $Cov_{MAC}(i,j) = \begin{cases} 0 \\ 1, & \mbox{if MDS } i\mbox{ covers the position } j \mbox{ in the MAC} \end{cases}$ \\\\\\
-$IES(j) = \begin{cases} 0 \\ 1, & \mbox{if } i \mbox{ is part of an IES:} \mathlarger{\sum_{0 \leq i \leq q} Cov_{MIC}(i,j) = 0} \end{cases}$ \\\\\\
 
 $\mbox{Objective Function:} \qquad min \mathlarger{\sum_{i,j} MDS_{MACstart}(i,j)}$
 
@@ -23,25 +19,25 @@ $\mbox{Objective Function:} \qquad min \mathlarger{\sum_{i,j} MDS_{MACstart}(i,j
 
 \paragraph{MDS integrity and validity}MDSs must correspond to identical or reverse and complemented substrings of MIC and MAC. The following constraints enforce this fact:
 \\\\\\
-$MDS_{MICstart}(i,a) + MDS_{MICend}(i,b) + MDS_{MACstart}(i,c) + MDS_{MACend}(i,d) + Inv(i) \leq 5 cwc(a,b,c,d)$ \\\\\\
-$MDS_{MICstart}(i,a) + MDS_{MICend}(i,b) + MDS_{MACstart}(i,c) + MDS_{MACend}(i,d) \leq 4 Eq(a,b,c,d)$ \\\\\\
-$\mathlarger{\sum_{j} MDS_{MICstart}(i,j)\leq 1 \qquad \forall i}$ \\\\\\
-$\mathlarger{\sum_{j} MDS_{MICend}(i,j) = \sum_{j} MDS_{MICstart}(i,j) \qquad \forall i}$ \\\\\\
+$(1) \qquad MDS_{MICstart}(i,a) + MDS_{MICend}(i,b) + MDS_{MACstart}(i,c) + MDS_{MACend}(i,d) + Inv(i) \leq 5 cwc(a,b,c,d) \label{eq:someequation} \qquad \forall i,a,b,c,d$ \\\\\\
+$(2) \qquad MDS_{MICstart}(i,a) + MDS_{MICend}(i,b) + MDS_{MACstart}(i,c) + MDS_{MACend}(i,d) \leq 4 Eq(a,b,c,d) \qquad \forall i,a,b,c,d $ \\\\\\
+$(3) \qquad \mathlarger{\sum_{j} MDS_{MICstart}(i,j)\leq 1 \qquad \forall i}$ \\\\\\
+$(4) \qquad \mathlarger{\sum_{j} MDS_{MICend}(i,j) = \sum_{j} MDS_{MICstart}(i,j) \qquad \forall i}$ \\\\\\
 
 \paragraph{Coverage} $ $
 \\\\\\
-$\mathlarger{\sum_{l\leq j} MDS_{MICstart}(i,l) + \sum_{l\geq j}MDS_{MICend}(i,l) - 2Cov_{MIC}(i,j) = 0}$ \\\\\\
-$\mathlarger{\sum_{l\leq j} MDS_{MACstart}(i,l) + \sum_{l\geq j}MDS_{MACend}(i,l) - 2Cov_{MAC}(i,j) = 0}$ \\\\\\
+$(5) \qquad \mathlarger{\sum_{l\leq j} MDS_{MICstart}(i,l) + \sum_{l\geq j}MDS_{MICend}(i,l) - 2Cov_{MIC}(i,j) = 0} \qquad \forall i,j $ \\\\\\
+$(6) \qquad \mathlarger{\sum_{l\leq j} MDS_{MACstart}(i,l) + \sum_{l\geq j}MDS_{MACend}(i,l) - 2Cov_{MAC}(i,j) = 0} \qquad \forall i,j $ \\\\\\
 
 \paragraph{Pointer Regions} $ $
 \\\\\\
-$P_{start}(i,j) = MDS_{MACStart}(i,j) \qquad \forall i \neq 1$ \\\\\\
-$P_{end}(i,j) = MDS_{MACEnd}(i-1,j) \qquad \forall i \neq 1$ \\\\\\
-$Cov_{MACPOINT}(i,j) = \mathlarger{\sum_{b \geq j} P_{start}(i,b) + \sum_{e < j} P_{end}(i,e) \qquad \forall i}$ \\\\\\
-$\mathlarger{\sum_{i} Cov_{MAC}(i,j) \geq 1 \qquad \forall j }$ \\\\\\
-$\mathlarger{\sum_{i} Cov_{MAC}(i,j) \leq 2 \qquad \forall j }$ \\\\\\
-$\mathlarger{\sum_{i} Cov_{MAC}(i,j) - \sum_{i} Cov_{MACPOINT}(i,j) = 1 \qquad \forall j}$ \\\\\\
+$(7) \qquad P_{start}(i,j) = MDS_{MACStart}(i,j) \qquad \forall i \neq 1$ \\\\\\
+$(8) \qquad P_{end}(i,j) = MDS_{MACEnd}(i-1,j) \qquad \forall i \neq 1$ \\\\\\
+$(9) \qquad Cov_{MACPOINT}(i,j) = \mathlarger{\sum_{b \geq j} P_{start}(i,b) + \sum_{e < j} P_{end}(i,e) \qquad \forall i}$ \\\\\\
+$(10) \qquad \mathlarger{\sum_{i} Cov_{MAC}(i,j) \geq 1 \qquad \forall j }$ \\\\\\
+$(11) \qquad \mathlarger{\sum_{i} Cov_{MAC}(i,j) \leq 2 \qquad \forall j }$ \\\\\\
+$(12) \qquad \mathlarger{\sum_{i} Cov_{MAC}(i,j) - \sum_{i} Cov_{MACPOINT}(i,j) = 1 \qquad \forall j}$ \\\\\\
+
+Variables marked with $*$ will be populated during the preprocessing phase. \\\\\\
 
 % FIXME: <=, > not <= =>.
-% FIXME: remove unused 
-% TODO: Add "For every i" in constarints 3 and 4

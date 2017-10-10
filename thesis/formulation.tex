@@ -20,12 +20,12 @@ This generator script takes the following parameters to shape the wanted instanc
 
 \begin{itemize}
 	\item MIC length
-	\item MDS range quantity
+	\item MDS quantity
 	\item Overlap size
-	\item Inversing rate
+	\item Inverse rate
 \end{itemize}
 
-Running \texttt{\$ python3 gen.py} produces an instance consisting in:
+The generated instance consists in:
 
 \begin{itemize}
 	\item A (randomised) MIC DNA sequence
@@ -33,21 +33,59 @@ Running \texttt{\$ python3 gen.py} produces an instance consisting in:
 	\item The resulting MAC sequence
 \end{itemize}
 
-\section{Preprocessing}
-This part of the software computes the value for some of the variables, taking the instance as input.
+Running \texttt{\$ python gen.py}, we get:
+\begin{verbatim}
+Generated instance:
 
-Some of the defined variables are \textit{4-dimensions MIC length * MIC length * MAC length * MAC length} arrays. The need of a sparse data structure was immediatly clear: TODO
+MDS     Start   End
+0       3       9
+1       21      27
+2       30      38
+3       40      50
+4       13      19
 
+P       Start1  End1    Start2  End2
+1       7       9       21      23
+2       25      27      30      32
+3       35      38      40      43
+4       46      50      13      17
+
+MIC     ---AAATAT----TGGAGG--ATCGGT---GTAGAATT--ATTTCGTGGA----------
+               ^^    ^^^^    ^^  ^^   ^^   ^^^  ^^^   ^^^^
+MAC     AAATATCGGTAGAATTTCGTGGAGG
+            ^^  ^^   ^^^   ^^^^
+\end{verbatim}
+The parameters used were:
+
+\begin{itemize}
+	\item $60$ as MAC length
+	\item A random value in the $2-5$ range as MDS quantity
+	\item $0$ as Inverse rate
+	\item $30\%$ as Overlap size
+\end{itemize}
+
+The pointer regions are marked in both MIC and MAC. IESs are masked for clarity.
 
 \section{ILP}
 \input{ilp_formulation}
 
-\section{GUROBI Implementation}
+\section{Preprocessing}
+This part of the software computes the value for some of the variables, taking the instance as input.
+
+Some of the defined variables are \textit{4-dimensional MIC length $\times$ MIC length $\times$ MAC length $\times$ MAC length} arrays. The necessity of a sparse data structure was immediatly clear: \textit{Sparray}, a Python module \cite{sparray} for sparse n-dimensional arrays using dictionaries supporting any number of dimensions and any size was chosen to support these variables.
+
+The Read-Write performance on these objects is satisfying: 15 milion integer values are written in random indexes in a 150M $\times$ 150M $\times$ 150M $\times$ 150M \textit{4d sparray} in less than 20 seconds. The data can then be accessed using a notation similar to the standard array one (\texttt{Sparray[Index1, Index2, Index3, Index4]}). \textit{Eq} and {cwc} are populated during this phase, with a naive iterative algorithm.
+
+Here we encounter our first big limitation of a \textit{pure} linear programming approach. Populating Eq and cwc in our test instance (60 characters long MIC) was a question of seconds but this task becomes so expensive it's infeasible with even genome sequences of more than 1000 characters.
+
+The subsequences matching part must be approached with an high performing alignment tool like \textit{BLAST}.
+
+\section{Gurobi Implementation}
 TODO
 
-\section{Proof of correctness}
+\section{Correctness}
 
-\begin{lemma}
+\paragraph{Lemma.}
 Suppose
 
 $I$ to be an instance of the problem,
@@ -57,6 +95,11 @@ $P$ to be the ILP formulation associated to $I$,
 $S$ to be an assignment to every variable of $P$ satisfying the constraints.
 
 Then it's possible to build a solution for $I$ with cost equal to the objective function in $S$.
-\end{lemma}
+
+\paragraph{Proof.}
+TODO
+
+
+\section{Conclusions}
 
 TODO
