@@ -15,7 +15,6 @@ Each gene in the macronucleus may be present in the micronucleus as several nonc
 
 The general RNA-guided mechanism that regulate and lead this process of assembly is not known, theoretical investigations can be found in \cite{Brijder2007} and \cite{Ehrenfeucht:2004:CLC:971120}.
 
-
 \section{Biological Motivation}
 The guided genome rearrangement problem has (and it's) been extensively \cite{Ehrenfeucht:2004:CLC:971120} studied, both as biochemical process and mathematical model, as it provides an exaggerated case of a phenomenon observed among different species in different ways \cite{ANGELESKA20093020}. Similar broad scale, somatic rearrangement events occur in many eukaryotic cells and tumors.
 
@@ -57,6 +56,12 @@ We focus on the second phase, trying to map the following "building blocks":
 	\item \textbf{Pointers}, overlap sections between MDSs in the MAC (maybe inverted), present in multiple copies in the MIC;
 \end{itemize}
 
+\begin{figure}[h]
+  \centering
+    \includegraphics[width=200pt]{pointers}
+  \caption{ An example of a pointer sequence between two MDSs in the MIC \cite{ANGELESKA2007706}.}
+\end{figure}
+
 The "inverse", "reverse", "reverse complement" terms refer to the \textit{Watson-Crick reverse complement} of the sequence.
 
 The goal is to produce a \textit{rearrangement map}: a set of disjoint substrings representing the building blocks, eventual operations they will go through the process (scrambling, inversion) and their "destination" on the produced genome.
@@ -85,13 +90,36 @@ The algorithm is the following:
 \end{enumerate}
 
 An example regular expression used in step \textbf{1} is \texttt{A{0,4}(CCCCAAAA)+C{0,4}}.
+\begin{figure}[h]
+  \centering
+    \includegraphics[width=\textwidth]{mds_ies_db_Step6_final_ies_annotation.jpg}
+  \caption{Step 3 of MIDAS: Resolve high scoring pairs overlaps by merging HSPs that overlap at least 50\%. In this picture, orange HSPs do overlap at least 50\% and one of the red HSPs is contained within the other (longer) red HSP. We merge these orange and red HSPs. The purple HSPs and the third red HSP does not satisfy our merging criteria, so we leave them as they are. The remaining overlap between purple blocks and between red blocks defines a pointer sequence. \cite{midas}}
+
+\end{figure}
 
 During step \textbf{2}, long (at least 28 nucletides) high scoring pairs (HSPs) are found using BLAST. Next, in step \textbf{3} overlapping HSPs are merged (if they overlap at least 50\%).
 Step \textbf{4} makes sure that no portion of the MAC sequnces remains uncovered, using BLAST with lower requirements (at least 12 nucletides) that can potentially fill the gaps.
 Finally, MIC sub-sequences that are in between HSPs are considered IESs.
 
 \paragraph{}
+\begin{figure}[h]
+
+  \centering
+    \includegraphics[width=\textwidth]{reversal1}
+
+  \caption{ Difference of two chromosomes of species A and B. The difference is described with respect to the ordering of the chromosome segments of B \cite{DBLP:journals/corr/Brijder17}.}
+  \label{fig:reversal1}
+
+\end{figure}
 The recent \textbf{Sorting by Reversals and the Theory of 4-Regular Graphs} \cite{DBLP:journals/corr/Brijder17} shows an interesting approach in describing the \textit{Reversal} evolutionary event and illustrates its correlation to the DNA recombination problem found in ciliates. The \textit{reversal distance} is defined as the least number of reversals required to accomplish the transformation (an efficient algorithm to compute this distance can be found in \cite{Hannenhalli}). The reversal event is then cast as a special case of double-cut-and-join (DCJ) operation (which can happen within a chromosome or between more of them). Similarly, a formula to compute the DCJ distance is given in \cite{Bergeron2006}.
+
+
+\begin{figure}[h]
+  \centering
+    \includegraphics[width=\textwidth]{reversal2}
+  \caption{Optimal sorting of the signed permutation of Figure \ref{fig:reversal1} by reversals \cite{DBLP:journals/corr/Brijder17}.}
+
+\end{figure}
 
 The problem of computing the distance between two permutations is often recast as the problem of computing $d(\pi)$, the reversal distance between a permutation $\pi$ and the identity permutation $(1 2 ... n)$. The reconstruction of one possible sequence of reversals that realizes $d(\pi)$ is called the \textit{sorting by reversals} problem.
 
@@ -101,3 +129,25 @@ How 4-regular multigraphs, circle graphs and delta-matroids can be used to study
 
 \paragraph{}
 \textbf{DNA Recombination through Assembly Graph}\cite{ANGELESKA20093020} takes a more elaborate combinatorial approach, introducing the notion of \textit{assembly graph} as a finite connected graph where all vertices are rigid vertices of valency 1 or 4. The recombination process is then modeled using polygonal paths, tranverse paths and smoothings.
+\begin{figure}[h]
+  \centering
+    \includegraphics[width=\textwidth]{assembly_graphs}
+  \caption{ Examples of assembly graphs. Simple assembly graphs (A) and (B), and a non-simple assembly graph (C) \cite{ANGELESKA20093020}.}
+  \label{fig:reversal1}
+\end{figure}
+
+\paragraph{}
+
+The model proposed in \textbf{RNA-guided DNA assembly} \cite{ANGELESKA2007706} points out how RNA templates can provide a plausible explanation for the homologous recombination. It translates the three molecular operations described in the \textit{Molecular Operation for Gene Assembly} chapter of \cite{Ehrenfeucht:2004:CLC:971120} using the theorized braiding model:
+
+\begin{itemize}
+  \item \textbf{Loop recombination} (\textit{ld}) - A pair of repeat sequences (the pointers) flanking a non-scrambled IES between MDSs guides excision of the IES, joining the consecutive MDSs.
+  \item \textbf{Hairping recombination} (\textit{hi}) -  It is applicable to a portion of a gene containing an inverted MDS, i.e., one copy of the pointer is an inversion of the other.
+  \item \textbf{Double-loop recombination} (\textit{dlad}) applies when the segment enclosed between one pair of pointers overlaps the sequence enclosed between another pair of pointers.
+\end{itemize}
+
+\begin{figure}[h]
+  \centering
+    \includegraphics[width=\textwidth]{pointer_operations1}
+    \caption{Three pointer reduction operations: (A) \textit{ld}, (B) \textit{hi} and (C) \textit{dlad}.}
+\end{figure}  

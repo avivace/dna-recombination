@@ -1,4 +1,4 @@
-The entire software and documentation produced during the Stage experience and the thesis drafting, including initial and discarded attempts are hosted in a public Git \href{https://github.com/avivace/dna-recombination}{repository} \cite{avivace_repo} on GitHub.
+The entire software and documentation produced during the Stage experience and the thesis drafting, including initial and discarded attempts are available in a public Git \href{https://github.com/avivace/dna-recombination}{repository} \cite{avivace_repo} on GitHub.
 
 \section{Tools}
 The sperimental work of the Stage experience was done on a GNU/Linux Debian \texttt{buster/sid} workstation, making large of use of the shell and other tools:
@@ -14,7 +14,9 @@ The \texttt{TeX} typesetting engine (in the \texttt{LaTex} macros environment, w
 \section{Reduced artificial instance}
 Working on the entire genomes sequences would be prohibitive for such approach, and many of the existent solutions make assumptions on the nature of the genomes, as we've seen.
 
-We take into consideration a reduced instace, designing a Python script which \textit{procedually} generates an instance of the problem with given specific characteristics.
+We take into consideration a reduced instance, considering a shorter sequence and only the main events (Scrambling, Inversing, Overlapping).
+
+A Python script which \textit{procedually} generates an instance of the problem with given specific characteristics has been developed:
 
 This generator script takes the following parameters to shape the wanted instance:
 
@@ -64,7 +66,7 @@ The parameters used were:
 	\item $30\%$ as Overlap size
 \end{itemize}
 
-The pointer regions are marked in both MIC and MAC. IESs are masked for clarity.
+The pointer regions are marked in both MIC and MAC. IESs are masked for clarity. The complete annotation map is exposed through four produced objects: \texttt{MDS\_MAC}, \texttt{MDS\_Mic}, \texttt{Pointer\_MIC} and \texttt{Pointer\_MAC}, easily navigable to fetch any information about the simulated process, e.g., \texttt{Pointer\_MIC[1]["Start2"]} and \texttt{Pointer\_MIC[1]["End2"]} gives the position of the second occurrence of the first pointer section in the MIC. A JSON object, serialising this data is produced, too.
 
 \section{ILP}
 \input{ilp_formulation}
@@ -72,7 +74,7 @@ The pointer regions are marked in both MIC and MAC. IESs are masked for clarity.
 \section{Preprocessing}
 This part of the software computes the value for some of the variables, taking the instance as input.
 
-Some of the defined variables are \textit{4-dimensional MIC length $\times$ MIC length $\times$ MAC length $\times$ MAC length} arrays. The necessity of a sparse data structure was immediatly clear: \textit{Sparray}, a Python module \cite{sparray} for sparse n-dimensional arrays using dictionaries supporting any number of dimensions and any size was chosen to support these variables.
+Some of the defined variables are \textit{4-dimensional MIC length $\times$ MIC length $\times$ MAC length $\times$ MAC length} arrays. The necessity of a sparse data structure was immediatly clear: \textit{Sparray}, a Python module \cite{sparray} for sparse n-dimensional arrays using \textit{dictionaries} supporting any number of dimensions and any size was chosen to support these variables.
 
 The Read-Write performance on these objects is satisfying: 15 milion integer values are written in random indexes in a 150M $\times$ 150M $\times$ 150M $\times$ 150M \textit{4d sparray} in less than 20 seconds. The data can then be accessed using a notation similar to the standard array one (\texttt{Sparray[Index1, Index2, Index3, Index4]}). \textit{Eq} and {cwc} are populated during this phase, with a naive iterative algorithm.
 
@@ -102,4 +104,6 @@ TODO
 
 \section{Conclusions}
 
-TODO
+A \textit{pure} integer linear programming approach is clearly not possible given the magnitude of the data to process.
+
+\paragraph{Improving the formulation}
