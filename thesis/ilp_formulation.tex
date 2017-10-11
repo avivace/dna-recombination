@@ -32,21 +32,19 @@ $(4) \qquad \mathlarger{\sum_{j} MDS_{MICend}(i,j) = \sum_{j} MDS_{MICstart}(i,j
 $(4b) \qquad \mathlarger{\sum_{j} MDS_{MACend}(i,j) = \sum_{j} MDS_{MACstart}(i,j) \qquad \forall i}$ \\\\\\
 \clearpage
 \paragraph{Coverage} $ $
-\\\\\\
-$(5) \qquad \mathlarger{\sum_{l\leq j} MDS_{MICstart}(i,l) + \sum_{l>j}MDS_{MICend}(i,l) - 2Cov_{MIC}(i,j) = 0} \qquad \forall i,j $ \\\\\\
+\\\\
+$(5) \qquad \mathlarger{\sum_{l\leq j} MDS_{MICstart}(i,l) + \sum_{l>j}MDS_{MICend}(i,l) - 2Cov_{MIC}(i,j) = 0} \qquad \forall i,j $ \\\\
 $(6) \qquad \mathlarger{\sum_{l\leq j} MDS_{MACstart}(i,l) + \sum_{l> j}MDS_{MACend}(i,l) - 2Cov_{MAC}(i,j) = 0} \qquad \forall i,j $ \\
 \paragraph{Pointer Regions} $ $
-\\\\\\
-Each Pointer starts when the correspondent MDS does. \\\\\\
-$(7) \qquad P_{start}(i,j) = MDS_{MACStart}(i,j) \qquad \forall i \neq 1$ \\\\\\
-Each Pointer ends when the previous MDS does. \\\\\\
-$(8) \qquad P_{end}(i,j) = MDS_{MACEnd}(i-1,j) \qquad \forall i \neq 1$ \\\\\\
-MAC Pointer Coverage \\\\\\
-$(9) \qquad Cov_{MACPOINT}(i,j) = \mathlarger{\sum_{b \geq j} P_{start}(i,b) + \sum_{e < j} P_{end}(i,e) \qquad \forall i}$ \\\\\\
-100\% MAC coverage, every part should be covered by (at least) one MDS. \\\\\\
-$(10) \qquad \mathlarger{\sum_{i} Cov_{MAC}(i,j) \geq 1 \qquad \forall j }$ \\\\\\
-\clearpage
+\\\\
+Each Pointer starts when the correspondent MDS does. \\\\
+$(7) \qquad P_{start}(i,j) = MDS_{MACStart}(i,j) \qquad \forall i \neq 1$ \\\\
+Each Pointer ends when the previous MDS does. \\\\
+$(8) \qquad P_{end}(i,j) = MDS_{MACEnd}(i-1,j) \qquad \forall i \neq 1$ \\\\
+MAC Pointer Coverage \\\\
+$(9) \qquad Cov_{MACPOINT}(i,j) = \mathlarger{\sum_{b \geq j} P_{start}(i,b) + \sum_{e < j} P_{end}(i,e) \qquad \forall i}$ \\\\
+100\% MAC coverage, every part should be covered by (at least) one MDS. \\\\
+$(10) \qquad \mathlarger{\sum_{i} Cov_{MAC}(i,j) \geq 1 \qquad \forall j }$ \\\\
 Overlap sections are covered by 2 MDS \\\\
 $(11) \qquad \mathlarger{\sum_{i} Cov_{MAC}(i,j) \leq 2 \qquad \forall j }$ \\\\\\
-
-% FIXME: <=, > not <= =>.
+\clearpage

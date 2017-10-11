@@ -98,7 +98,7 @@ An example regular expression used in step \textbf{1} is \texttt{A{0,4}(CCCCAAAA
   \caption{Step 3 of MIDAS: Resolve high scoring pairs overlaps by merging HSPs that overlap at least 50\%. In this picture, orange HSPs do overlap at least 50\% and one of the red HSPs is contained within the other (longer) red HSP. We merge these orange and red HSPs. The purple HSPs and the third red HSP does not satisfy our merging criteria, so we leave them as they are. The remaining overlap between purple blocks and between red blocks defines a pointer sequence. \cite{midas}}
 
 \end{figure}
-
+\clearpage
 During step \textbf{2}, long (at least 28 nucletides) high scoring pairs (HSPs) are found using BLAST. Next, in step \textbf{3} overlapping HSPs are merged (if they overlap at least 50\%).
 Step \textbf{4} makes sure that no portion of the MAC sequences remains uncovered, using BLAST with lower requirements (at least 12 nucletides) that can potentially fill the gaps.
 Finally, MIC sub-sequences that are in between HSPs are considered IESs.
