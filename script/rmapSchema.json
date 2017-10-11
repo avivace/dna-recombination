@@ -1,0 +1,122 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#", 
+  "definitions": {}, 
+  "id": "http://example.com/example.json", 
+  "properties": {
+    "mac_length": {
+      "default": 50, 
+      "description": "An explanation about the purpose of this instance.", 
+      "examples": [
+        "50"
+      ], 
+      "id": "/properties/mac_length", 
+      "title": "The mac_length schema.", 
+      "type": "integer"
+    }, 
+    "mds": {
+      "id": "/properties/mds", 
+      "items": {
+        "id": "/properties/mds/items", 
+        "properties": {
+          "end1": {
+            "default": 32, 
+            "description": "An explanation about the purpose of this instance.", 
+            "examples": [
+              "32"
+            ], 
+            "id": "/properties/mds/items/properties/end1", 
+            "title": "The end1 schema.", 
+            "type": "integer"
+          }, 
+          "end2": {
+            "default": 5, 
+            "description": "An explanation about the purpose of this instance.", 
+            "examples": [
+              "5"
+            ], 
+            "id": "/properties/mds/items/properties/end2", 
+            "title": "The end2 schema.", 
+            "type": "integer"
+          }, 
+          "start1": {
+            "default": 30, 
+            "description": "An explanation about the purpose of this instance.", 
+            "examples": [
+              "30"
+            ], 
+            "id": "/properties/mds/items/properties/start1", 
+            "title": "The start1 schema.", 
+            "type": "integer"
+          }, 
+          "start2": {
+            "default": 3, 
+            "description": "An explanation about the purpose of this instance.", 
+            "examples": [
+              "3"
+            ], 
+            "id": "/properties/mds/items/properties/start2", 
+            "title": "The start2 schema.", 
+            "type": "integer"
+          }
+        }, 
+        "type": "object"
+      }, 
+      "type": "array"
+    }, 
+    "mic_length": {
+      "default": 100, 
+      "description": "An explanation about the purpose of this instance.", 
+      "examples": [
+        "100"
+      ], 
+      "id": "/properties/mic_length", 
+      "title": "The mic_length schema.", 
+      "type": "integer"
+    }, 
+    "pointers": {
+      "id": "/properties/pointers", 
+      "items": {
+        "id": "/properties/pointers/items", 
+        "properties": {
+          "end": {
+            "default": 32, 
+            "description": "An explanation about the purpose of this instance.", 
+            "examples": [
+              "32"
+            ], 
+            "id": "/properties/pointers/items/properties/end", 
+            "title": "The end schema.", 
+            "type": "integer"
+          }, 
+          "inverted": {
+            "default": 0, 
+            "description": "An explanation about the purpose of this instance.", 
+            "examples": [
+              "0"
+            ], 
+            "id": "/properties/pointers/items/properties/inverted", 
+            "title": "The inverted schema.", 
+            "type": "integer"
+          }, 
+          "start": {
+            "default": 27, 
+            "description": "An explanation about the purpose of this instance.", 
+            "examples": [
+              "27"
+            ], 
+            "id": "/properties/pointers/items/properties/start", 
+            "title": "The start schema.", 
+            "type": "integer"
+          }
+        }, 
+        "type": "object"
+      }, 
+      "type": "array"
+    }
+  }, 
+  "required": [
+    "mac_length", 
+    "mic_length"
+  ], 
+  "type": "object"
+}

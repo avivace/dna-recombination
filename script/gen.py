@@ -4,6 +4,7 @@
 from __future__ import division
 from __future__ import print_function
 import random 
+import json
 from random import shuffle
 from gurobipy import *
 
@@ -161,3 +162,5 @@ while m < MDSn:
 	m += 1
 
 print("MAC\t"+mac)
+
+print(json.dumps(MDS), json.dumps(P))
