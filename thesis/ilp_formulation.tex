@@ -1,3 +1,4 @@
+\label{ilp_form}
 \subsection{Variables definitions}
 
 $*Eq(i,j,h,l) = \begin{cases} 0 \\ 1, & \mbox{if } \code{MIC[i:j]} = \code{MAC[h:l]} \end{cases}$ \\\\\\
@@ -23,10 +24,12 @@ MDSs must correspond to identical or reverse and complemented substrings of MIC 
 \\\\\\
 $(1) \qquad MDS_{MICstart}(i,a) + MDS_{MICend}(i,b) + MDS_{MACstart}(i,c) + MDS_{MACend}(i,d) + Inv(i) \leq 5 cwc(a,b,c,d) \label{eq:someequation} \qquad \forall i,a,b,c,d$ \\\\\\
 $(2) \qquad MDS_{MICstart}(i,a) + MDS_{MICend}(i,b) + MDS_{MACstart}(i,c) + MDS_{MACend}(i,d) \leq 4 Eq(a,b,c,d) \qquad \forall i,a,b,c,d $ \\\\\\
-Each MDS can start one time. \\\\\\
+Each MDS can start one time, both in the MAC and the MIC. \\\\\\
 $(3) \qquad \mathlarger{\sum_{j} MDS_{MICstart}(i,j)\leq 1 \qquad \forall i}$ \\\\\\
+$(3b) \qquad \mathlarger{\sum_{j} MDS_{MACstart}(i,j)\leq 1 \qquad \forall i}$ \\\\\\
 If an MDS starts, it must end too. \\\\\\
 $(4) \qquad \mathlarger{\sum_{j} MDS_{MICend}(i,j) = \sum_{j} MDS_{MICstart}(i,j) \qquad \forall i}$ \\\\\\
+$(4b) \qquad \mathlarger{\sum_{j} MDS_{MACend}(i,j) = \sum_{j} MDS_{MACstart}(i,j) \qquad \forall i}$ \\\\\\
 
 \paragraph{Coverage} $ $
 \\\\\\
