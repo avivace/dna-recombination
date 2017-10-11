@@ -19,8 +19,8 @@ The general RNA-guided mechanism that regulate and lead this process of assembly
 The guided genome rearrangement problem has (and it's) been extensively \cite{Ehrenfeucht:2004:CLC:971120} studied, both as biochemical process and mathematical model, as it provides an exaggerated case of a phenomenon observed among different species in different ways \cite{ANGELESKA20093020}. Similar broad scale, somatic rearrangement events occur in many eukaryotic cells and tumors.
 
 Many discrete and topological models, mathematical approaches, biological and biochemical explanations and speculations on the theme can be found in literature (such as \cite{prescott2001} \cite{Brijder2014} \cite{ANGELESKA2007706} and \cite{programmedgenome}).
-
-\section{Formalisation}
+\clearpage
+\section{Formalization}
 
 \begin{figure}[h]
   \centering
@@ -29,7 +29,7 @@ Many discrete and topological models, mathematical approaches, biological and bi
 
 \end{figure}
 
-The recognised events in the rearrangement process are:
+The recognized events in the rearrangement process are:
 
 \begin{itemize}
 	\item The MAC begins a copy of the MIC DNA. The chromosomes are fragmented and amplified. The result of this process is the \textit{precursor}. $\sim$90\% of the complexity is lost.
@@ -74,6 +74,8 @@ Ideally, we want to reach an approach capable of treating the entire MAC and MIC
 
 Formally, given an initial genome(MIC or MAC precursor) and a rearranged one (MAC) the program produces an annotation map of the process the input has been through.
 
+\clearpage
+
 \section{Existent Approaches}
 
 \paragraph{mds-ies-db}\cite{mdsiesdb} uses the MDS/IES DNA Annotation Software (MIDAS), \cite{midas} to propose an annotation map presuming the MDSs general pattern (using regular expressions) and using the Basic Local Alignment Search Tool (BLAST \cite{boratyn2013blast}) to flag matching regions.
@@ -98,7 +100,7 @@ An example regular expression used in step \textbf{1} is \texttt{A{0,4}(CCCCAAAA
 \end{figure}
 
 During step \textbf{2}, long (at least 28 nucletides) high scoring pairs (HSPs) are found using BLAST. Next, in step \textbf{3} overlapping HSPs are merged (if they overlap at least 50\%).
-Step \textbf{4} makes sure that no portion of the MAC sequnces remains uncovered, using BLAST with lower requirements (at least 12 nucletides) that can potentially fill the gaps.
+Step \textbf{4} makes sure that no portion of the MAC sequences remains uncovered, using BLAST with lower requirements (at least 12 nucletides) that can potentially fill the gaps.
 Finally, MIC sub-sequences that are in between HSPs are considered IESs.
 
 \paragraph{}
@@ -127,6 +129,7 @@ The gene assembly in ciliates is finally casted with the theory of sorting by re
 
 How 4-regular multigraphs, circle graphs and delta-matroids can be used to study gene assembly in ciliates it's further discussed in \cite{Brijder2014}.
 
+\clearpage
 \paragraph{}
 \textbf{DNA Recombination through Assembly Graph}\cite{ANGELESKA20093020} takes a more elaborate combinatorial approach, introducing the notion of \textit{assembly graph} as a finite connected graph where all vertices are rigid vertices of valency 1 or 4. The recombination process is then modeled using polygonal paths, tranverse paths and smoothings.
 \begin{figure}[h]
