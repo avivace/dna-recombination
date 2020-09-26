@@ -6,7 +6,7 @@ Advisor: Gianluca Della Vedova (Università Milano-Bicocca)
 
 ### [Thesis (PDF)](https://github.com/avivace/dna-recombination/raw/master/thesis/thesis.pdf)
 
-This repository covers everything related to my Computer Science B.Sc thesis and final Stage experience.
+This repository covers everything related to my [Computer Science BSc](https://github.com/avivace/compsci) thesis and final Stage experience.
 
 ## Contents
 
